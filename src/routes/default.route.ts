@@ -1,0 +1,48 @@
+import { Router } from "express"
+
+
+class Default {
+    public readonly router = Router()
+
+    constructor() {
+        this.loadRoutes()
+    }
+
+    private loadRoutes(): void {
+        this.router.get("/", (req, res) => {
+            res.render("index")
+        })
+        this.router.get("/help", (req, res) => {
+            res.render("help")
+        })
+        this.router.get("/category", (req, res) => {
+            res.locals.categories = [
+                {
+                    'label': 'Brazil',
+                    'slug': 'brazil'
+                },
+                {
+                    'label': 'Eletric',
+                    'slug': 'eletric'
+                },
+                {
+                    'label': 'Knowledge',
+                    'slug': 'know-category'
+                },
+                {
+                    'label': 'Cars',
+                    'slug': 'cars'
+                },
+                {
+                    'label': 'Danger',
+                    'slug': 'danger-contents'
+                }
+            ]
+            res.render("category")
+        })
+    }
+}
+
+const DefaultRoute = new Default()
+
+export { DefaultRoute }

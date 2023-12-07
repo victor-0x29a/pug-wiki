@@ -19,6 +19,10 @@
 
 body {
     background-color: $bg-color;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 header {
@@ -56,7 +60,8 @@ header {
 }
 
 .content-origin {
-    height: 100vh;
+    width: 95%;
+    max-width: 1400px;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -99,5 +104,18 @@ header {
 
     button {
         padding: 5px;
+    }
+}
+
+.page-header {
+    margin-top: 1rem;
+    margin-bottom: 2.45rem;
+    h3 {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    hr {
+        border-color: $second-color;
     }
 }

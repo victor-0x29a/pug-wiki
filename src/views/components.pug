@@ -9,3 +9,8 @@ mixin header(items)
                     for item in items
                         li
                             a(href=item.href) #{item.label}
+
+mixin title(title)
+    section.page-header
+        h3 #{title}
+        hr

@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 
 import { TemplateMiddleware, SassMiddleware } from './middlewares'
+import { DefaultRoute } from './routes'
 
 class Server {
     public readonly app = express()
@@ -18,14 +19,7 @@ class Server {
     }
 
     private readonly loadRoutes = (): void => {
-        this.app.get("/", (req, res) => {
-            res.render("index")
-        })
-        this.app.get("/help", (req, res) => {
-            res.render("help", {
-                walletbtc: process.env.walletbtc
-            })
-        })
+        this.app.use("/", DefaultRoute.router)
     }
 
     private readonly loadMiddlewares = (): void => {
