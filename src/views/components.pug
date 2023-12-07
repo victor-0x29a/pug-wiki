@@ -1,0 +1,11 @@
+
+mixin header(application_name, items)
+    header
+        nav.nav-header
+            ul
+                li
+                    h2.nav-title #{application_name}
+                for item in items
+                    li
+                        a(href=item.href)
+                            h2 #{item.label}

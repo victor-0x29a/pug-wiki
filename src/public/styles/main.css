@@ -1,0 +1,1 @@
+*{list-style:none;text-decoration:none;padding:0;margin:0}*::after,*::before{padding:0;margin:0}body{background-color:rgba(245,238,200,0.4)}header{display:block;width:100%}header nav{width:100%}header nav ul{display:flex;flex-direction:row;justify-content:space-around}header nav ul .nav-title{float:left}
