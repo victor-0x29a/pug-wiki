@@ -1,0 +1,21 @@
+$large: 1100px;
+$medium: 900px;
+$normal-tablet: 700px;
+$small-tablet: 500px;
+$normal-phone: 480px;
+$small-phone: 400px;
+$very-small-phone: 340px;
+
+@media screen and (max-width: $medium) {
+    .donator {
+        border: inherit !important;
+        p {
+            padding: 5px;
+            text-align: justify !important;
+            font-size: 1.2rem !important;
+            max-width: inherit !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+        }
+    }
+}

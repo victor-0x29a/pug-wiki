@@ -1,0 +1,9 @@
+@import 'vars';
+
+@keyframes nav-title-anim {
+    50% {
+        color: $second-color;
+    } 100% {
+        color: inherit;
+    }
+}

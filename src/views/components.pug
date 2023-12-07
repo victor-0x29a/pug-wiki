@@ -1,11 +1,11 @@
 
-mixin header(application_name, items)
+mixin header(items)
     header
         nav.nav-header
             ul
                 li
-                    h2.nav-title #{application_name}
-                for item in items
-                    li
-                        a(href=item.href)
-                            h2 #{item.label}
+                    h2.nav-title #{process.env.appname}
+                if items
+                    for item in items
+                        li
+                            a(href=item.href) #{item.label}

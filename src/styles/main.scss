@@ -1,6 +1,12 @@
 @import 'vars';
+@import 'anim';
+@import 'queries';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
+    color: $text-color;
+    font-family: 'Poppins', sans-serif;
     list-style: none;
     text-decoration: none;
     padding: 0;
@@ -24,11 +30,74 @@ header {
         ul {
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
+            justify-content: space-between;
+
+            li {
+                width: 100%;
+                text-align: center;
+                font-size: 1rem;
+                a {
+                    font-size: 1.3rem;
+                    &:hover {
+                        color: $link-color;
+                    }
+                }
+            }
 
             .nav-title {
+                cursor: default;
+                font-weight: bold;
+                margin-left: 10px;
                 float: left;
+                animation: nav-title-anim 2s infinite ease-in-out;
             }
         }
+    }
+}
+
+.content-origin {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    justify-content: center;
+    height: 80%;
+}
+
+.icon {
+    width: 100px;
+}
+
+.donator {
+    margin-top: 1rem;
+    padding: 20px;
+    border: 2px solid $second-color;
+    border-radius: 4px;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    .wallet {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    p, button {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 5px;
     }
 }

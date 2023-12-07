@@ -19,17 +19,11 @@ class Server {
 
     private readonly loadRoutes = (): void => {
         this.app.get("/", (req, res) => {
-            res.render("index", {
-                itemsNavBar: [
-                    {
-                        label: "Categorias",
-                        href: "/category"
-                    },
-                    {
-                        label: "Ajude a manter",
-                        href: "/help"
-                    }
-                ]
+            res.render("index")
+        })
+        this.app.get("/help", (req, res) => {
+            res.render("help", {
+                walletbtc: process.env.walletbtc
             })
         })
     }

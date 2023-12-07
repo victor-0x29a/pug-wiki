@@ -8,6 +8,6 @@ html
         link(rel='stylesheet', href='/styles/main.css')
 
     body
-        +header("0xBook", itemsNavBar)
-        div#content
+        div.content-origin
+            +header(itemsNavBar)
             block layout-content
