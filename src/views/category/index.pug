@@ -3,3 +3,13 @@ include ../components
 
 block layout-content
     +title("Categorias")
+
+    +text(
+        "Escolha alguma categoria de sua preferência."
+    )
+
+    ul.category-list
+        if categories
+            for category in categories
+                li.category-item
+                    a(href=`/category/${category.slug}`) #{category.label}

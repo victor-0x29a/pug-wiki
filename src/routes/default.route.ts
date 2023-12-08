@@ -1,11 +1,16 @@
 import { Router } from "express"
-
+import { TemplateMiddleware } from "../middlewares"
 
 class Default {
     public readonly router = Router()
 
     constructor() {
+        this.loadMiddlewares()
         this.loadRoutes()
+    }
+
+    private loadMiddlewares(): void {
+        this.router.use(TemplateMiddleware)
     }
 
     private loadRoutes(): void {
@@ -13,7 +18,9 @@ class Default {
             res.render("index")
         })
         this.router.get("/help", (req, res) => {
-            res.render("help")
+            res.render("help", {
+                walletbtc: process.env.walletbtc
+            })
         })
         this.router.get("/category", (req, res) => {
             res.locals.categories = [

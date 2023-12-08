@@ -4,7 +4,8 @@ mixin header(items)
         nav.nav-header
             ul
                 li
-                    h2.nav-title #{process.env.appname}
+                    a(href="/")
+                        h2(onclick="goToHome()").nav-title #{process.env.appname}
                 if items
                     for item in items
                         li
@@ -14,3 +15,6 @@ mixin title(title)
     section.page-header
         h3 #{title}
         hr
+
+mixin text(text)
+    p.paragraph #{text}

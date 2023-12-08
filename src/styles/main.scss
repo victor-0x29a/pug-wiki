@@ -42,9 +42,6 @@ header {
                 font-size: 1rem;
                 a {
                     font-size: 1.3rem;
-                    &:hover {
-                        color: $link-color;
-                    }
                 }
             }
 
@@ -56,6 +53,12 @@ header {
                 animation: nav-title-anim 2s infinite ease-in-out;
             }
         }
+    }
+}
+
+a {
+    &:hover {
+        color: $link-color;
     }
 }
 
@@ -112,10 +115,26 @@ header {
     margin-bottom: 2.45rem;
     h3 {
         font-weight: bold;
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     hr {
         border-color: $second-color;
     }
+}
+
+.category-list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 40px;
+}
+
+.category-item {
+    font-size: 1.2rem;
+}
+
+.paragraph {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

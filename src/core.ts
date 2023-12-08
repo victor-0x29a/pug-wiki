@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 
-import { TemplateMiddleware, SassMiddleware } from './middlewares'
+import { SassMiddleware } from './middlewares'
 import { DefaultRoute } from './routes'
 
 class Server {
@@ -23,7 +23,6 @@ class Server {
     }
 
     private readonly loadMiddlewares = (): void => {
-        this.app.use(TemplateMiddleware)
         this.app.use(SassMiddleware)
         this.app.use(express.static(path.resolve(__dirname, "public")))
     }
