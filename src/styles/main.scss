@@ -51,6 +51,39 @@ header {
 
 a {
     &:hover {
-        color: $link-color;
+        color: $second-color;
+    }
+}
+
+input {
+    border: 0;
+    border-radius: $bd-radius;
+    background-color: $input-bg-color;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    outline: 0;
+    padding: $pd-default;
+    width: $width-default - $pd-default;
+
+
+    &::after {
+        border: 0;
+        outline: 0;
+    }
+}
+
+button {
+    border: 0;
+    font-size: 1rem;
+    border-radius: $bd-radius;
+    color: white;
+    background: $btn-bg;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition-duration: $delay;
+    cursor: pointer;
+    width: $width-default;
+    &:hover {
+        background: $btn-bg-on-hover;
     }
 }

@@ -47,6 +47,9 @@ class Default {
             ]
             res.render("category")
         })
+        this.router.get("/sigin", (req, res) => {
+            res.render("sigin")
+        })
     }
 }
 

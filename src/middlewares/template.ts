@@ -9,6 +9,10 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
         {
             label: "Ajude a manter",
             href: "/help"
+        },
+        {
+            label: "Entrar",
+            href: "/sigin"
         }
     ]
     next()

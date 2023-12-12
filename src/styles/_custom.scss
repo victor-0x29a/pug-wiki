@@ -84,3 +84,28 @@
     float: left;
     animation: nav-title-anim 2s infinite ease-in-out;
 }
+
+.high-size {
+    font-size: 1.2rem;
+}
+
+.medium-size {
+    font-size: 1rem;
+}
+
+.default-form {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section {
+        display: block;
+
+        p {
+            width: $width-default;
+        }
+
+    }
+}

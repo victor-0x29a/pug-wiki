@@ -1,0 +1,16 @@
+extends ../layout
+include ../components
+
+block layout-content
+    +title("Entre na sua conta")
+
+    div.container
+        form.default-form
+            section
+                p.high-size #{"Usuário"}
+                input(type="text").medium-size
+            section.high-size
+                p.high-size #{"Senha"}
+                input(type="password").medium-size
+            section.high-size
+                button(type="submit").high-size #{"Entrar"}
