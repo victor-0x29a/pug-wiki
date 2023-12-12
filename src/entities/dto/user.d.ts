@@ -3,5 +3,5 @@ export type User = {
     username: string
     password: string
     user_agent: string
-    permission: string
+    permission: number
 }

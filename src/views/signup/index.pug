@@ -2,7 +2,7 @@ extends ../layout
 include ../components
 
 block layout-content
-    +title("Entre na sua conta")
+    +title("Registre uma conta")
 
     div.container
         form.default-form
@@ -10,10 +10,12 @@ block layout-content
                 p.high-size #{"Usuário"}
                 input(type="text").medium-size
             section
-                p.high-size #{"Senha"}
+                p.high-size #{"Sua senha"}
+                input(type="password").medium-size
+            section
+                p.high-size #{"Repita sua senha"}
                 input(type="password").medium-size
             section
                 button(type="submit").high-size #{"Entrar"}
             section.details-form
                 a(href="/recover") #{"Esqueceu a senha?"}
-                a(href="/signup") #{"Não tem uma conta?"}

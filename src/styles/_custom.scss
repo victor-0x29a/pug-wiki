@@ -112,7 +112,8 @@
 
 .details-form {
     width: $width-default;
-    display: flex;
-    flex-direction: column;
     text-align: left;
+    a {
+        display: block;
+    }
 }

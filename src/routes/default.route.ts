@@ -50,6 +50,9 @@ class Default {
         this.router.get("/sigin", (req, res) => {
             res.render("sigin")
         })
+        this.router.get("/signup", (req, res) => {
+            res.render("signup")
+        })
     }
 }
 
