@@ -83,6 +83,7 @@ button {
     transition-duration: $delay;
     cursor: pointer;
     width: $width-default;
+    padding: $pd-default;
     &:hover {
         background: $btn-bg-on-hover;
     }

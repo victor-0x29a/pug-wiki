@@ -2,7 +2,7 @@ extends ../layout
 include ../components
 
 block layout-content
-    +title("Registre uma conta")
+    +title("Cadastre uma conta")
 
     div.container
         form.default-form
@@ -16,6 +16,6 @@ block layout-content
                 p.high-size #{"Repita sua senha"}
                 input(type="password").medium-size
             section
-                button(type="submit").high-size #{"Entrar"}
+                button(type="submit").medium-size #{"Registrar"}
             section.details-form
-                a(href="/recover") #{"Esqueceu a senha?"}
+                a(href="/sigin") #{"Já tem uma conta?"}
