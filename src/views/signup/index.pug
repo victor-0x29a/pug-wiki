@@ -5,16 +5,16 @@ block layout-content
     +title("Cadastre uma conta")
 
     div.container
-        form.default-form
+        form(method="post", action="/auth/signup").default-form
             section
                 p.high-size #{"Usuário"}
-                input(type="text").medium-size
+                input(type="text", name="username").medium-size
             section
                 p.high-size #{"Sua senha"}
-                input(type="password").medium-size
+                input(type="password", name="password").medium-size
             section
                 p.high-size #{"Repita sua senha"}
-                input(type="password").medium-size
+                input(type="password", name="repeat-password").medium-size
             section
                 button(type="submit").medium-size #{"Registrar"}
             section.details-form

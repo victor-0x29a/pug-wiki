@@ -17,7 +17,9 @@ class Repository {
             ...(!isById && { username: byIdentification })
         }
 
-        const entity = await db.user.findUnique({
+        console.log(whereData)
+
+        const entity = await db.user.findFirst({
             where: whereData
         })
 

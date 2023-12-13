@@ -15,8 +15,9 @@ class Auth {
                 token: "hash"
             })
         })
-        this.router.post("/signup", (req, res) => {
-            const resController = this.controller.register(req.body)
+        this.router.post("/signup", async (req, res) => {
+            console.log(req.body)
+            const resController = await this.controller.register(req.body)
 
             return res.status(resController.response.status)
                 .json(resController.response.data)
