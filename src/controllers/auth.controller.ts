@@ -1,10 +1,13 @@
 import { User } from "../entities"
 import { ControllerResponse } from "../types"
-
-export const notCrash = 0x29a
+import { UserService } from "../entities"
 
 export const AuthController = {
-    register: (user: User): ControllerResponse => {
+    register: async (user: User): Promise<ControllerResponse> => {
+        const hasUserWithSameNick = await UserService.findByUsername(user.username)
+
+        console.log(hasUserWithSameNick)
+
         return {
             error: false,
             response: {
