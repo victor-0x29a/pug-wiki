@@ -8,7 +8,7 @@ mixin header(items)
                         h2(onclick="goToHome()").nav-title #{process.env.appname}
                 if items
                     for item in items
-                        li
+                        li.common-header-item
                             a(href=item.href) #{item.label}
 
 mixin title(title)

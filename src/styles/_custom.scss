@@ -10,12 +10,19 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
 }
 
 .center {
     justify-content: center;
     height: 80%;
+}
+
+.feed-container {
+    border-right: 1px solid $second-color;
+    border-left: 1px solid $second-color;
+    min-height: 90vh;
+    padding: 0.5rem;
 }
 
 .icon {
@@ -61,8 +68,9 @@
 }
 
 .category-list {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 2.4rem;
 }
 
@@ -85,11 +93,11 @@
 }
 
 .high-size {
-    font-size: calc($text-size + 0.5rem);
+    font-size: calc(#{$text-size} + 0.2rem);
 }
 
 .medium-size {
-    font-size: calc($text-size - 0.5rem);
+    font-size: calc(#{$text-size} - 0.2rem);
 }
 
 .default-form {
@@ -99,13 +107,8 @@
     flex-direction: column;
     align-items: center;
 
-    section {
-        display: block;
-
-        p {
-            width: $width-default;
-        }
-
+    section > p {
+        width: $width-default;
     }
 }
 
@@ -120,9 +123,38 @@
 }
 
 .group {
-    width: 600px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
+    max-width: 600px;
+    min-width: 250px;
     input, button {
         width: 100%;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-right {
+    justify-content: right;
+}
+
+.search-area {
+
+    > button, input {
+        font-size: calc(#{$text-size} - 0.2rem);
+        padding: calc(#{$pd-default} - 4px);
+    }
+
+    > button {
+        width: 5rem;
+    }
+    > input {
+        width: 10rem;
+        margin-right: 0.3rem;
     }
 }

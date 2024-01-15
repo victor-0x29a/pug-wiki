@@ -9,3 +9,7 @@ block layout-content
             for category in categories
                 li.category-item
                     a(href=`/category/${category.slug}`) #{category.label}
+        else
+            +text(
+                "Nenhuma categoria encontrada."
+            )

@@ -1,4 +1,7 @@
 extends layout
 
 block layout-content
-    img(src="/pug.png")
+    div.container.feed-container
+        div.row.flex-right.search-area
+            input(type="search" placeholder="Soldados...")
+            button(type="submit") #{"Buscar"}
