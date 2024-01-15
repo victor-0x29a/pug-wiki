@@ -6,16 +6,16 @@ block layout-content
 
     div.container
         form(method="post", action="/auth/signup").default-form
-            section
+            section.group
                 p.high-size #{"Usuário"}
                 input(type="text", name="username").medium-size
-            section
+            section.group
                 p.high-size #{"Sua senha"}
                 input(type="password", name="password").medium-size
-            section
+            section.group
                 p.high-size #{"Repita sua senha"}
                 input(type="password", name="repeat-password").medium-size
-            section
+            section.group
                 button(type="submit").medium-size #{"Registrar"}
-            section.details-form
+            section.group.details-form
                 a(href="/sigin") #{"Já tem uma conta?"}

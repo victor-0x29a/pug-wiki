@@ -6,14 +6,14 @@ block layout-content
 
     div.container
         form.default-form
-            section
+            section.group
                 p.high-size #{"Usuário"}
                 input(type="text").medium-size
-            section
+            section.group
                 p.high-size #{"Senha"}
                 input(type="password").medium-size
-            section
+            section.group
                 button(type="submit").medium-size #{"Entrar"}
-            section.details-form
+            section.group.details-form
                 a(href="/recover") #{"Esqueceu a senha?"}
                 a(href="/signup") #{"Não tem uma conta?"}

@@ -25,7 +25,6 @@
 .donator {
     margin-top: 1rem;
     padding: 20px;
-    border: 2px solid $second-color;
     border-radius: 4px;
 
     h2 {
@@ -40,7 +39,7 @@
     }
 
     p, button {
-        font-size: 1rem;
+        font-size: $text-size;
     }
 
     button {
@@ -63,16 +62,16 @@
 
 .category-list {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 40px;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    gap: 2.4rem;
 }
 
 .category-item {
-    font-size: 1.2rem;
+    font-size: $text-size;
 }
 
 .paragraph {
-    font-size: 1.3rem;
+    font-size: $text-size;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -86,15 +85,15 @@
 }
 
 .high-size {
-    font-size: 1.2rem;
+    font-size: calc($text-size + 0.5rem);
 }
 
 .medium-size {
-    font-size: 1rem;
+    font-size: calc($text-size - 0.5rem);
 }
 
 .default-form {
-    max-width: 400px;
+    max-width: 900px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -111,11 +110,19 @@
 }
 
 .details-form {
-    width: $width-default;
     display: flex;
     flex-direction: column;
     text-align: left;
     a {
         display: block;
+        width: max-content;
+    }
+}
+
+.group {
+    width: 600px;
+
+    input, button {
+        width: 100%;
     }
 }

@@ -4,15 +4,16 @@ include ../components
 block layout-content
     +title("Vire um doador")
 
-    div.container.center
+    div.container
         img(src="/btc.png", alt="Bitcoin").icon
         section.donator
             h2 #{`Salve o #${process.env.appname}`}
-            p #{"Ajude o projeto a se manter online, a carteira BTC está logo abaixo, não precisa ser um valor alto!"}
+            p #{"Ajude o projeto a se manter online, a carteira BTC está logo abaixo."}
             div.wallet
-                button(onclick=`copyToClipboard('${walletbtc}')`) #{walletbtc}
+                button(onclick=`copyToClipboard('${walletbtc}')`) #{"Copiar carteira"}
 
     script.
         function copyToClipboard(value) {
             navigator.clipboard.writeText(value)
+            alert('Carteira copiada!')
         }

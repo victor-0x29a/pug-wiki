@@ -12,6 +12,7 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     &::after, &::before {
         padding: 0;
         margin: 0;
@@ -40,9 +41,9 @@ header {
             li {
                 width: 100%;
                 text-align: center;
-                font-size: 1rem;
+                font-size: $text-size;
                 a {
-                    font-size: 1.3rem;
+                    font-size: $text-size;
                 }
             }
         }
@@ -74,7 +75,7 @@ input {
 
 button {
     border: 0;
-    font-size: 1rem;
+    font-size: calc($text-size + 0.3rem);
     border-radius: $bd-radius;
     color: white;
     background: $btn-bg;
