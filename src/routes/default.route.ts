@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { TemplateMiddleware } from "../middlewares"
+import { CategoryController } from '../controllers'
 
 class Default {
     public readonly router = Router()
@@ -22,29 +23,14 @@ class Default {
                 walletbtc: process.env.walletbtc
             })
         })
-        this.router.get("/category", (req, res) => {
-            res.locals.categories = [
-                {
-                    'label': 'Brazil',
-                    'slug': 'brazil'
-                },
-                {
-                    'label': 'Eletric',
-                    'slug': 'eletric'
-                },
-                {
-                    'label': 'Knowledge',
-                    'slug': 'know-category'
-                },
-                {
-                    'label': 'Cars',
-                    'slug': 'cars'
-                },
-                {
-                    'label': 'Danger',
-                    'slug': 'danger-contents'
-                }
-            ]
+        this.router.get("/category", async (req, res) => {
+            const fetchCategories = await CategoryController.getAll()
+            if (!fetchCategories.error) {
+                res.locals.categories = fetchCategories.response.data
+            } else {
+                req.flash("error", "Houve um erro ao listar as categorias.")
+            }
+
             res.render("category")
         })
         this.router.get("/signin", (req, res) => {
