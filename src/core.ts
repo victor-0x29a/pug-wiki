@@ -19,7 +19,7 @@ class Server {
 
     private readonly loadSettings = (): void => {
         this.app.use(cookieParser());
-        this.app.use(session({ secret: process.env.SESSION_SECRET! }));
+        this.app.use(session({ secret: process.env.SESSION_SECRET!, resave: true, saveUninitialized: true }));
         this.app.use(flash())
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.set('view engine', 'pug')

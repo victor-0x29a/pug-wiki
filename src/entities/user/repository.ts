@@ -1,45 +1,35 @@
 import { db } from '../../database'
-import { User } from '../dto'
+import { IUser } from '../dto'
 
 class Repository {
-    async findAll(): Promise<User[]> {
-        const entities = await db.user.findMany() as User[]
+    async findAll(): Promise<IUser[]> {
+        const entities = await db.user.findMany() as IUser[]
 
         return entities
     }
 
-    async findOne(identification: string | number, type: 'id' | 'username'): Promise<User> {
-        const isById = Boolean(type === 'id')
-        const byIdentification = isById ? Number(identification) : String(identification)
-
-        const whereData = {
-            ...(isById && { id: byIdentification }),
-            ...(!isById && { username: byIdentification })
-        }
-
-        console.log(whereData)
+    async findOne(username: string): Promise<IUser | null> {
+        const whereData = { username }
 
         const entity = await db.user.findFirst({
             where: whereData
-        })
+        }) as IUser | null
 
         return entity
     }
 
-    async delete(identification: string | number, type: 'id' | 'username') {
-        const isById = Boolean(type === 'id')
-        const byIdentification = isById ? Number(identification) : String(identification)
+    async delete(id: number): Promise<IUser | null> {
+        const whereData = { id }
 
-        const whereData = {
-            ...(isById && { id: byIdentification }),
-            ...(!isById && { username: byIdentification })
-        }
-
-        const operation = await db.user.delete({
+        return await db.user.delete({
             where: whereData
-        })
+        }) as IUser | null
+    }
 
-        return operation
+    async create(data: IUser) {
+        return await db.user.create({
+            data
+        })
     }
 }
 

@@ -16,16 +16,17 @@ class Auth {
             })
         })
         this.router.post("/signup", async (req, res) => {
-            console.log(req.body)
             const resController = await this.controller.register(req.body)
 
-            req.flash('success', 'Conta criada.');
+            const ENDPOINT_TO_REDIRECT = '/signup'
 
-            if (!resController.error)
-                return res.redirect('/signup')
+            if (!resController.error) {
+                req.flash('success', 'Conta criada.');
+                return res.redirect(ENDPOINT_TO_REDIRECT)
+            }
 
-            return res.status(resController.response.status)
-                .json(resController.response.data)
+            req.flash('error', resController.response.data)
+            res.redirect(ENDPOINT_TO_REDIRECT)
         })
     }
 }
