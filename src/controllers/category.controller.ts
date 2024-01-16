@@ -1,26 +1,17 @@
+import express from 'express'
 import { CategoryService } from "../entities/category";
-import { ControllerResponse } from '../types/controllers'
+import { ICategory } from '../entities/dto/category.dto';
 
 export const CategoryController = {
-    async getAll(): Promise<ControllerResponse> {
-        try {
-            const categories = CategoryService.findAll()
-
-            return {
-                error: false,
-                response: {
-                    data: categories,
-                    status: 200
-                }
-            }
-        } catch (error) {
-            return {
-                error: true,
-                response: {
-                    data: 'Houve um erro inesperado.',
-                    status: 500
-                }
-            }
-        }
+    async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
+        return CategoryService.findAll()
+            .then((data: ICategory[]) => {
+                return res.status(200).render('category', {
+                    categories: data
+                })
+            })
+            .catch((err) => {
+                next(err)
+            })
     }
 }

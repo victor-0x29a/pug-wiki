@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 
-import { SassMiddleware } from './middlewares'
+import { AppBrokedMiddleware, SassMiddleware } from './middlewares'
 import { DefaultRoute, AuthRoute } from './routes'
 import bodyParser from 'body-parser'
 import flash from 'express-flash'
@@ -15,6 +15,7 @@ class Server {
         this.loadSettings()
         this.loadMiddlewares()
         this.loadRoutes()
+        this.loadSecurityMiddlewares()
     }
 
     private readonly loadSettings = (): void => {
@@ -34,6 +35,10 @@ class Server {
     private readonly loadMiddlewares = (): void => {
         this.app.use(SassMiddleware)
         this.app.use(express.static(path.resolve(__dirname, "public")))
+    }
+
+    private readonly loadSecurityMiddlewares = (): void => {
+        this.app.use(AppBrokedMiddleware)
     }
 }
 

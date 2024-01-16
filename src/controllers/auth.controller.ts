@@ -1,38 +1,21 @@
-import { IUser } from "../entities"
-import { ControllerResponse } from "../types"
+
 import { UserService } from "../entities"
+import express from 'express'
 
 export const AuthController = {
-    register: async (user: IUser): Promise<ControllerResponse> => {
-        try {
-            const hasUserWithSameNick = await UserService.findByUsername(user.username)
+    register: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        return UserService.create(req?.body)
+            .then(() => {
+                req.flash('success', 'Usuário criado.')
 
-            if (hasUserWithSameNick)
-                return {
-                    error: true,
-                    response: {
-                        data: 'Coloque outro nome de usuário.',
-                        status: 409
-                    }
-                }
-
-            await UserService.create(user)
-
-            return {
-                error: false,
-                response: {
-                    data: 'Usuário criado.',
-                    status: 201
-                }
-            }
-        } catch (e) {
-            return {
-                error: true,
-                response: {
-                    data: 'Houve um erro inesperado.',
-                    status: 500
-                }
-            }
-        }
+                res.redirect('signup')
+            })
+            .catch(next)
+    },
+    registerPage: (req: express.Request, res: express.Response) => {
+        res.render('signup')
+    },
+    loginPage: (req: express.Request, res: express.Response) => {
+        res.render('signin')
     }
 }

@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { TemplateMiddleware } from "../middlewares"
-import { CategoryController } from '../controllers'
+import { AppBrokedMiddleware, TemplateMiddleware } from "../middlewares"
+import { AuthController, CategoryController } from '../controllers'
 
 class Default {
     public readonly router = Router()
@@ -8,10 +8,15 @@ class Default {
     constructor() {
         this.loadMiddlewares()
         this.loadRoutes()
+        this.loadSecurityMiddlewares()
     }
 
     private loadMiddlewares(): void {
         this.router.use(TemplateMiddleware)
+    }
+
+    private readonly loadSecurityMiddlewares = (): void => {
+        this.router.use(AppBrokedMiddleware)
     }
 
     private loadRoutes(): void {
@@ -23,22 +28,9 @@ class Default {
                 walletbtc: process.env.walletbtc
             })
         })
-        this.router.get("/category", async (req, res) => {
-            const fetchCategories = await CategoryController.getAll()
-            if (!fetchCategories.error) {
-                res.locals.categories = fetchCategories.response.data
-            } else {
-                req.flash("error", "Houve um erro ao listar as categorias.")
-            }
-
-            res.render("category")
-        })
-        this.router.get("/signin", (req, res) => {
-            res.render("signin")
-        })
-        this.router.get("/signup", (req, res) => {
-            res.render("signup")
-        })
+        this.router.get("/category", CategoryController.getAll)
+        this.router.get("/signin", AuthController.loginPage)
+        this.router.get("/signup", AuthController.registerPage)
     }
 }
 

@@ -15,19 +15,7 @@ class Auth {
                 token: "hash"
             })
         })
-        this.router.post("/signup", async (req, res) => {
-            const resController = await this.controller.register(req.body)
-
-            const ENDPOINT_TO_REDIRECT = '/signup'
-
-            if (!resController.error) {
-                req.flash('success', 'Conta criada.');
-                return res.redirect(ENDPOINT_TO_REDIRECT)
-            }
-
-            req.flash('error', resController.response.data)
-            res.redirect(ENDPOINT_TO_REDIRECT)
-        })
+        this.router.post("/signup", this.controller.register)
     }
 }
 

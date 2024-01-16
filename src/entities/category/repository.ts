@@ -3,23 +3,33 @@ import { ICategory } from '../dto/category.dto'
 
 class Repository {
     async findAll(): Promise<ICategory[]> {
-        const entities = await db.category.findMany() as ICategory[]
+        try {
+            const categories = await db.category.findMany() as ICategory[]
 
-        return entities
+            return categories
+        } catch (error) {
+            throw error
+        }
     }
 
-    async delete(id: number): Promise<ICategory | null> {
-        const whereData = { id }
-
-        return await db.category.delete({
-            where: whereData
-        }) as ICategory | null
+    async delete(id: number): Promise<Partial<ICategory>> {
+        try {
+            return db.category.delete({
+                where: { id }
+            }) as Partial<ICategory>
+        } catch (error) {
+            throw error
+        }
     }
 
     async create(data: ICategory) {
-        return await db.category.create({
-            data
-        })
+        try {
+            return await db.category.create({
+                data
+            })
+        } catch (error) {
+            throw error
+        }
     }
 }
 
