@@ -11,3 +11,8 @@ html
         div.content-origin
             +header(itemsNavBar)
             block layout-content
+
+    .script
+        if (messages.success)
+            script.
+                alert("#{messages.success}");

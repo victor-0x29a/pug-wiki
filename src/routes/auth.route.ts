@@ -10,7 +10,7 @@ class Auth {
     }
 
     private loadRoutes(): void {
-        this.router.post("/sigin", (req, res) => {
+        this.router.post("/signin", (req, res) => {
             return res.status(200).json({
                 token: "hash"
             })
@@ -18,6 +18,11 @@ class Auth {
         this.router.post("/signup", async (req, res) => {
             console.log(req.body)
             const resController = await this.controller.register(req.body)
+
+            req.flash('success', 'Conta criada.');
+
+            if (!resController.error)
+                return res.redirect('/signup')
 
             return res.status(resController.response.status)
                 .json(resController.response.data)

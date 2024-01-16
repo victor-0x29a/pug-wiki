@@ -47,8 +47,8 @@ class Default {
             ]
             res.render("category")
         })
-        this.router.get("/sigin", (req, res) => {
-            res.render("sigin")
+        this.router.get("/signin", (req, res) => {
+            res.render("signin")
         })
         this.router.get("/signup", (req, res) => {
             res.render("signup")

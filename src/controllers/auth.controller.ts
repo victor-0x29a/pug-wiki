@@ -6,7 +6,14 @@ export const AuthController = {
     register: async (user: User): Promise<ControllerResponse> => {
         const hasUserWithSameNick = await UserService.findByUsername(user.username)
 
-        console.log(hasUserWithSameNick)
+        if (hasUserWithSameNick)
+            return {
+                error: true,
+                response: {
+                    data: '01',
+                    status: 409
+                }
+            }
 
         return {
             error: false,

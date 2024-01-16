@@ -12,7 +12,7 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
         },
         {
             label: "Entrar",
-            href: "/sigin"
+            href: "/signin"
         }
     ]
     next()

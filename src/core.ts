@@ -4,6 +4,9 @@ import path from 'path'
 import { SassMiddleware } from './middlewares'
 import { DefaultRoute, AuthRoute } from './routes'
 import bodyParser from 'body-parser'
+import flash from 'express-flash'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
 
 class Server {
     public readonly app = express()
@@ -15,6 +18,9 @@ class Server {
     }
 
     private readonly loadSettings = (): void => {
+        this.app.use(cookieParser());
+        this.app.use(session({ secret: process.env.SESSION_SECRET! }));
+        this.app.use(flash())
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.set('view engine', 'pug')
         this.app.set('views', path.resolve(__dirname, 'views'))
