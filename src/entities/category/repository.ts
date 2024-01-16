@@ -22,3 +22,7 @@ class Repository {
         })
     }
 }
+
+const CategoryRepository = new Repository
+
+export { CategoryRepository }
