@@ -1,6 +1,7 @@
 import { IUser } from "../dto";
 import { UserRepository } from "./repository";
 import { AppError } from "../../appError";
+import { IUserSchema } from './serializer'
 
 class Service {
     private readonly repository = UserRepository
@@ -17,15 +18,19 @@ class Service {
 
     async create(data: Partial<IUser>): Promise<IUser> {
         try {
-            const hasUserWithSameNick = await UserService.findByUsername(data.username!)
+            return IUserSchema.validate(data).then(async (dataParsed) => {
+                const hasUserWithSameNick = await UserService.findByUsername(dataParsed.username!)
 
-            if (hasUserWithSameNick) {
-                throw new AppError('Coloque outro nome de usuário.')
-            }
+                if (hasUserWithSameNick) {
+                    throw new AppError('Coloque outro nome de usuário.')
+                }
 
-            const userCreated = await this.repository.create(data as IUser) as IUser
+                const userCreated = await this.repository.create(dataParsed as IUser) as IUser
 
-            return userCreated
+                return userCreated
+            }).catch((error) => {
+                throw new AppError(error.errors[0])
+            })
         } catch (error) {
             throw error
         }
