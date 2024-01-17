@@ -1,7 +1,7 @@
 import { AppError } from "../../appError";
 import { ICategory } from "../dto/category.dto";
 import { CategoryRepository } from "./repository";
-import { serializeCategory } from "./serializer";
+import { parseCategory } from "./parser";
 
 class Service {
     private readonly repository = CategoryRepository
@@ -9,7 +9,7 @@ class Service {
     async findAll(): Promise<ICategory[]> {
         try {
             const categories = await this.repository.findAll()
-            const categoriesParsed = categories.map(serializeCategory)
+            const categoriesParsed = categories.map(parseCategory)
 
             return categoriesParsed
         } catch (error) {

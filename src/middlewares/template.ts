@@ -8,11 +8,11 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
         },
         {
             label: "Ajude a manter",
-            href: "/help"
+            href: "/auth/help"
         },
         {
             label: "Entrar",
-            href: "/signin"
+            href: "/auth/signin"
         }
     ]
     next()

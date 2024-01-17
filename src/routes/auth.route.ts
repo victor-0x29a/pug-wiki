@@ -15,7 +15,9 @@ class Auth {
                 token: "hash"
             })
         })
+        this.router.get("/signin", this.controller.loginPage)
         this.router.post("/signup", this.controller.register)
+        this.router.get("/signup", this.controller.registerPage)
     }
 }
 

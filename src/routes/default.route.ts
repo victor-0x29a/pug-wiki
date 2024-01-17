@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { AppBrokedMiddleware, TemplateMiddleware } from "../middlewares"
-import { AuthController, CategoryController } from '../controllers'
+import { CategoryController } from '../controllers'
 
 class Default {
     public readonly router = Router()
@@ -29,8 +29,6 @@ class Default {
             })
         })
         this.router.get("/category", CategoryController.getAll)
-        this.router.get("/signin", AuthController.loginPage)
-        this.router.get("/signup", AuthController.registerPage)
     }
 }
 
