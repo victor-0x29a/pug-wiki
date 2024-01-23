@@ -2,6 +2,7 @@ import { AppError } from "../../appError";
 import { ICategory } from "../dto/category.dto";
 import { CategoryRepository } from "./repository";
 import { parseCategory } from "./parser";
+import { ICategorySchema } from "./serializer"
 
 class Service {
     private readonly repository = CategoryRepository
@@ -19,7 +20,11 @@ class Service {
 
     async create(data: ICategory): Promise<ICategory> {
         try {
-            return await this.create(data)
+            return ICategorySchema.validate(data).then(async (parsedData) => {
+                return await this.create(parsedData)
+            }).catch((error) => {
+                throw new AppError(error.errors[0])
+            })
         } catch (error) {
             throw error
         }

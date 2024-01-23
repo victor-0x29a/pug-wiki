@@ -158,3 +158,30 @@
         margin-right: 0.3rem;
     }
 }
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+
+    &::before {
+        display: block;
+        border: 2px solid $second-color;
+        width: 3rem;
+        height: 1.5rem;
+        content: "attr('title')";
+        background-color: white;
+        color: black;
+        font-weight: bolder;
+    }
+
+    > .dropdown-item {
+        display: none;
+    }
+
+    &:hover {
+     > .dropdown-item {
+        display: block;
+     }
+    }
+}

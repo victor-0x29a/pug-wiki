@@ -1,1 +1,1 @@
-export const getViewByPath = ({ path = '' }) => path.split('/')[2]
+export const getViewByPath = ({ path = '' }): string => path.split('/')[2]

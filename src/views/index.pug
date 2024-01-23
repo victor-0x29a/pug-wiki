@@ -1,7 +1,10 @@
 extends layout
+include ./components
 
 block layout-content
     div.container.feed-container
         div.row.flex-right.search-area
             input(type="search" placeholder="Soldados...")
             button(type="submit") #{"Buscar"}
+
+        +dropdown(dropdownItems)

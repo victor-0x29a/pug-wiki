@@ -1,10 +1,12 @@
-import { db } from '../../database'
+import { category } from '../../database'
 import { ICategory } from '../dto/category.dto'
 
 class Repository {
+    private readonly entity = category
+
     async findAll(): Promise<ICategory[]> {
         try {
-            const categories = await db.category.findMany() as ICategory[]
+            const categories = await this.entity.findMany() as ICategory[]
 
             return categories
         } catch (error) {
@@ -14,7 +16,7 @@ class Repository {
 
     async delete(id: number): Promise<Partial<ICategory>> {
         try {
-            return db.category.delete({
+            return this.entity.delete({
                 where: { id }
             }) as Partial<ICategory>
         } catch (error) {
@@ -24,7 +26,7 @@ class Repository {
 
     async create(data: ICategory) {
         try {
-            return await db.category.create({
+            return await this.entity.create({
                 data
             })
         } catch (error) {

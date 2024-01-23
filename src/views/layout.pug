@@ -3,13 +3,13 @@ include components
 doctype html
 html
     head
-        title #{"Pug Website"}
+        title #{process.env.appname}
         meta(charset="utf-8")
         link(rel='stylesheet', href='/styles/main.css')
 
     body
         div.content-origin
-            +header(itemsNavBar)
+            // +header(itemsNavBar)
             block layout-content
 
     .script

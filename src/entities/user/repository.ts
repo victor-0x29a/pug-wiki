@@ -1,10 +1,12 @@
-import { db } from '../../database'
+import { user } from '../../database'
 import { IUser } from '../dto'
 
 class Repository {
+    private readonly entity = user
+
     async findAll(): Promise<IUser[]> {
         try {
-            const entities = await db.user.findMany() as IUser[]
+            const entities = await this.entity.findMany() as IUser[]
 
             return entities
         } catch (error) {
@@ -16,7 +18,7 @@ class Repository {
         try {
             const whereData = { username }
 
-            const entity = await db.user.findFirst({
+            const entity = await this.entity.findFirst({
                 where: whereData
             }) as IUser | null
 
@@ -30,7 +32,7 @@ class Repository {
         try {
             const whereData = { id }
 
-            return await db.user.delete({
+            return await this.entity.delete({
                 where: whereData
             }) as IUser | null
         } catch (error) {
@@ -40,7 +42,7 @@ class Repository {
 
     async create(data: IUser) {
         try {
-            return await db.user.create({
+            return await this.entity.create({
                 data
             })
         } catch (error) {

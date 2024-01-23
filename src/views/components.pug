@@ -18,3 +18,11 @@ mixin title(title)
 
 mixin text(text)
     p.paragraph #{text}
+
+mixin dropdown(items, title)
+    ul(title="${title}").dropdown-container
+        if items
+            for item in items
+                li.dropdown-item
+                    a(href=item.href) #{item.label}
+    .script

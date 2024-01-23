@@ -13,5 +13,6 @@ export const CategoryController = {
             .catch((err) => {
                 next(err)
             })
-    }
+    },
+    /* TODO: Route & page to create a category */
 }
