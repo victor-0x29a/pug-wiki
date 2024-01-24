@@ -26,3 +26,10 @@ mixin dropdown(items, title)
                 li.dropdown-item
                     a(href=item.href) #{item.label}
     .script
+
+mixin warning()
+    - var message = messages.success || messages.error
+    - var typeClass = messages.success ? 'success' : 'error'
+    if message
+        section(class='warning-section warning-' + typeClass)
+            label #{message}
