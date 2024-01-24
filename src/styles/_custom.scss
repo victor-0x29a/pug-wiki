@@ -185,3 +185,28 @@
      }
     }
 }
+
+.warning-section {
+    width: 100%;
+    padding: $pd-default;
+    text-align: center;
+
+    > label {
+        font-weight: bolder;
+    }
+}
+
+.warning-success {
+    background-color: $success-bg;
+    > label {
+        font-size: $text-size;
+        color: $success-color;
+    }
+}
+
+.warning-error {
+    background-color: $error-bg;
+    > label {
+        color: $error-color;
+    }
+}
