@@ -1,3 +1,3 @@
 export const getStatusDebugger = () => ({
-    isEnabledDebugger: Boolean(process.env.DEBUGGER === 'true')
+    isEnabledDebugger: process.env.NODE_ENV === 'dev'
 })

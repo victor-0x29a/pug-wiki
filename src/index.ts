@@ -6,6 +6,7 @@ import { getStatusDebugger } from './utils';
 
 App.app.listen(Number.parseInt(process.env.httpport!), () => {
     if (getStatusDebugger().isEnabledDebugger) {
-        console.log('Server running')
+        const { httpport, appname } = process.env
+        console.log(`http://localhost:${httpport} - ${appname} Listening`)
     }
 })

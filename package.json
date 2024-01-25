@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DEBUGGER=true && nodemon src/index.ts"
+    "dev": "export NODE_ENV=dev && nodemon src/index.ts"
   },
   "author": "",
   "license": "ISC",
