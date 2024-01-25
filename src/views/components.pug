@@ -5,7 +5,7 @@ mixin header(items)
             ul
                 li
                     a(href="/")
-                        h2(onclick="goToHome()").nav-title #{process.env.appname}
+                        h2(onclick="goToHome()").nav-title #{process.env.APP_NAME}
                 if items
                     for item in items
                         li.common-header-item

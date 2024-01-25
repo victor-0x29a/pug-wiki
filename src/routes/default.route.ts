@@ -25,7 +25,7 @@ class Default {
         })
         this.router.get("/help", (req, res) => {
             res.render("help", {
-                walletbtc: process.env.walletbtc
+                walletbtc: process.env.WALLET_BTC
             })
         })
         this.router.get("/category", CategoryController.getAll)
