@@ -2,6 +2,7 @@ import { IUser } from "../dto";
 import { UserRepository } from "./repository";
 import { AppError } from "../../appError";
 import { IUserSchema } from './serializer'
+import { generateHash } from '../../utils'
 
 class Service {
     private readonly repository = UserRepository
@@ -25,9 +26,11 @@ class Service {
                     throw new AppError('Coloque outro nome de usuário.')
                 }
 
+                const passwordHashed = generateHash(dataParsed.password)
+
                 const userCreated = await this.repository.create({
                     username: dataParsed.username,
-                    password: dataParsed.password,
+                    password: passwordHashed,
                     permission: 1,
                     user_agent: dataParsed.user_agent!
                 }) as IUser

@@ -1,5 +1,3 @@
-
-import { AppError } from "../appError"
 import { UserService } from "../entities"
 import express from 'express'
 
