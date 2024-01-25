@@ -6,15 +6,12 @@ import express from 'express'
 export const AuthController = {
     register: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            const { password, passwordRepeated, username } = req?.body
-
-            if (password !== passwordRepeated) {
-                throw new AppError('Suas senhas não batem.')
-            }
+            const { password, repeatedPassword, username } = req?.body
 
             return UserService.create({
                 username,
                 password,
+                repeatedPassword,
                 user_agent: req.headers["user-agent"]
             })
                 .then(() => {

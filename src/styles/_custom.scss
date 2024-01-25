@@ -190,6 +190,8 @@
     width: 100%;
     padding: $pd-default;
     text-align: center;
+    border-radius: $bd-radius;
+    margin: 1rem 0 1rem 0;
 
     > label {
         font-weight: bolder;
