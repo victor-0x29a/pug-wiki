@@ -25,7 +25,12 @@ class Service {
                     throw new AppError('Coloque outro nome de usuário.')
                 }
 
-                const userCreated = await this.repository.create(dataParsed as IUser) as IUser
+                const userCreated = await this.repository.create({
+                    username: dataParsed.username,
+                    password: dataParsed.password,
+                    permission: 1,
+                    user_agent: dataParsed.user_agent!
+                }) as IUser
 
                 return userCreated
             }).catch((error) => {
