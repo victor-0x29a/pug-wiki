@@ -51,7 +51,4 @@ class Repository {
     }
 }
 
-
-const UserRepository = new Repository
-
-export { UserRepository }
+export { Repository as UserRepository }

@@ -5,7 +5,11 @@ import { IUserSchema } from './serializer'
 import { generateHash } from '../../utils'
 
 class Service {
-    private readonly repository = UserRepository
+    private readonly repository
+
+    constructor(repository: UserRepository) {
+        this.repository = repository
+    }
 
     async findByUsername(username: string): Promise<IUser | null> {
         try {
@@ -20,7 +24,7 @@ class Service {
     async create(data: Partial<IUser>): Promise<IUser> {
         try {
             return IUserSchema.validate(data).then(async (dataParsed) => {
-                const hasUserWithSameNick = await UserService.findByUsername(dataParsed.username!)
+                const hasUserWithSameNick = await this.findByUsername(dataParsed.username!)
 
                 if (hasUserWithSameNick) {
                     throw new AppError('Coloque outro nome de usuário.')
@@ -45,6 +49,4 @@ class Service {
     }
 }
 
-const UserService = new Service()
-
-export { UserService }
+export { Service as UserService }
