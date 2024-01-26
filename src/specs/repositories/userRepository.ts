@@ -1,3 +1,4 @@
+import { AppError } from '../../appError'
 import { IUser } from '../../entities/dto'
 
 interface deleteProps {
@@ -17,7 +18,8 @@ interface findFirstProps {
 }
 
 class Repository {
-    users: IUser[] = []
+    public hasDbConnection = true
+    public users: IUser[] = []
     private readonly entity = {
         findMany: async () => {
             return (await this.users)
@@ -40,8 +42,15 @@ class Repository {
         }
     }
 
+    checkHasConnection = () => {
+        if (!this.hasDbConnection) {
+            throw new AppError('Db connection.')
+        }
+    }
+
     async findAll(): Promise<IUser[]> {
         try {
+            this.checkHasConnection()
             const entities = await this.entity.findMany() as IUser[]
 
             return entities
@@ -52,6 +61,7 @@ class Repository {
 
     async findOne(username: string): Promise<IUser | null> {
         try {
+            this.checkHasConnection()
             const entity = await this.entity.findFirst({
                 where: { username }
             }) as IUser | null
@@ -64,6 +74,7 @@ class Repository {
 
     async delete(id: number) {
         try {
+            this.checkHasConnection()
             const whereData = { id }
 
             return await this.entity.delete({
@@ -76,6 +87,7 @@ class Repository {
 
     async create(data: IUser) {
         try {
+            this.checkHasConnection()
             return await this.entity.create({
                 data
             })

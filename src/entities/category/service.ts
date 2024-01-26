@@ -3,6 +3,7 @@ import { ICategory } from "../dto/category.dto";
 import { CategoryRepository } from "./repository";
 import { parseCategory } from "./parser";
 import { ICategorySchema } from "./serializer"
+import yup from 'yup'
 
 class Service {
     private readonly repository;
@@ -23,13 +24,15 @@ class Service {
 
     async create(data: ICategory): Promise<ICategory> {
         try {
-            return ICategorySchema.validate(data).then(async (parsedData) => {
-                return await this.repository.create(parsedData)
-            }).catch((error) => {
+            const schemaValidation = await ICategorySchema.validate(data)
+
+            return await this.repository.create(schemaValidation)
+        } catch (error: any) {
+            if (error?.name === 'ValidationError') {
                 throw new AppError(error.errors[0])
-            })
-        } catch (error) {
-            throw error
+            } else {
+                throw error
+            }
         }
     }
 }

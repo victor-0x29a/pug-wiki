@@ -1,3 +1,4 @@
+import { AppError } from '../../appError'
 import { ICategory } from '../../entities/dto/category.dto'
 
 interface createProps {
@@ -11,8 +12,9 @@ interface deleteProps {
 }
 
 class Repository {
-    categories: ICategory[] = []
-    entity = {
+    public hasDbConnection = true
+    public categories: ICategory[] = []
+    private entity = {
         findMany: async () => {
             return Promise.resolve(await this.categories)
         },
@@ -27,8 +29,15 @@ class Repository {
         }
     }
 
+    checkHasConnection = () => {
+        if (!this.hasDbConnection) {
+            throw new AppError('Db connection.')
+        }
+    }
+
     async findAll(): Promise<ICategory[]> {
         try {
+            this.checkHasConnection()
             const categories = await this.entity.findMany() as ICategory[]
 
             return categories
@@ -39,6 +48,7 @@ class Repository {
 
     async delete(id: number) {
         try {
+            this.checkHasConnection()
             return this.entity.delete({
                 where: { id }
             }) as Partial<ICategory>
@@ -49,6 +59,7 @@ class Repository {
 
     async create(data: ICategory) {
         try {
+            this.checkHasConnection()
             return await this.entity.create({
                 data
             })

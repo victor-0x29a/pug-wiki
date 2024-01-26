@@ -50,3 +50,27 @@ test('should list all categories', async () => {
     const requestWithUsersFilled = await service.findAll()
     expect(requestWithUsersFilled).toEqual([data])
 })
+
+test('should doesnt list all categories when havent database connection', async () => {
+    const repository = new CategoryRepository()
+
+    repository.hasDbConnection = false
+
+    const service = new CategoryService(repository)
+
+    expect(async () => await service.findAll()).rejects.toEqual(new AppError('Db connection.'))
+})
+
+test('should doesnt list all categories when havent database connection', async () => {
+    const repository = new CategoryRepository()
+
+    repository.hasDbConnection = false
+
+    const service = new CategoryService(repository)
+    const data = {
+        "label": "foo",
+        "slug": "bar-slug"
+    }
+
+    expect(async () => await service.create(data)).rejects.toEqual(new AppError('Db connection.'))
+})
