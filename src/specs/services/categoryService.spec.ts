@@ -7,8 +7,8 @@ test('should create a category', async () => {
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
     const data = {
-        "label": "top",
-        "slug": "top-slug"
+        "label": "foo",
+        "slug": "bar-slug"
     }
     const request = await service.create(data)
     await expect(request).toStrictEqual({
@@ -21,8 +21,32 @@ test('should doesnt create a category without slug', async () => {
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
     const data = {
-        "label": "top",
+        "label": "foo",
         "slug": ""
     }
     await expect(async () => await service.create(data)).rejects.toEqual(new AppError("O slug é obrigatório."))
+})
+
+
+test('should list all categories', async () => {
+    const repository = new CategoryRepository()
+    const service = new CategoryService(repository)
+
+    const requestWithEmptyCategories = await service.findAll()
+
+    expect(requestWithEmptyCategories).toEqual([])
+
+    const data = {
+        "label": "foo",
+        "slug": "bar-slug"
+    }
+    const dataExpected = {
+        "id": 1,
+        ...data
+    }
+    const requestToCreate = await service.create(data)
+    await expect(requestToCreate).toStrictEqual(dataExpected)
+
+    const requestWithUsersFilled = await service.findAll()
+    expect(requestWithUsersFilled).toEqual([data])
 })
