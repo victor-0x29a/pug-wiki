@@ -5,7 +5,10 @@ import { parseCategory } from "./parser";
 import { ICategorySchema } from "./serializer"
 
 class Service {
-    private readonly repository = CategoryRepository
+    private readonly repository;
+    constructor(repository: CategoryRepository) {
+        this.repository = repository
+    }
 
     async findAll(): Promise<ICategory[]> {
         try {
@@ -21,7 +24,7 @@ class Service {
     async create(data: ICategory): Promise<ICategory> {
         try {
             return ICategorySchema.validate(data).then(async (parsedData) => {
-                return await this.create(parsedData)
+                return await this.repository.create(parsedData)
             }).catch((error) => {
                 throw new AppError(error.errors[0])
             })
@@ -31,6 +34,4 @@ class Service {
     }
 }
 
-const CategoryService = new Service()
-
-export { CategoryService }
+export { Service as CategoryService }
