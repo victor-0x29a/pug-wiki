@@ -8,6 +8,8 @@ import flash from 'express-flash'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 
+const { SESSION_SECRET } = process.env
+
 class Server {
     public readonly app = express()
 
@@ -20,7 +22,7 @@ class Server {
 
     private readonly loadSettings = (): void => {
         this.app.use(cookieParser());
-        this.app.use(session({ secret: process.env.SESSION_SECRET!, resave: true, saveUninitialized: true }));
+        this.app.use(session({ secret: SESSION_SECRET!, resave: true, saveUninitialized: true }));
         this.app.use(flash())
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.set('view engine', 'pug')

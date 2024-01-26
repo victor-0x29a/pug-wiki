@@ -1,9 +1,9 @@
 import dotenv from 'dotenv'
-import Core from "./core";
 import { isStaging } from './constants';
-
 const envFile = isStaging ? '.env.staging' : '.env.production'
 dotenv.config({ path: `./${envFile}` })
+
+import Core from "./core";
 
 const { HTTP_PORT, APP_NAME } = process.env
 
