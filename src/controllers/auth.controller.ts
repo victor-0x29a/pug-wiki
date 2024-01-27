@@ -25,6 +25,16 @@ export const AuthController = {
             next(error)
         }
     },
+    login: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            const { token } = await user.createAuth(req.body)
+            res.setHeader('authorization', token)
+            req.flash('success', 'Bem-vindo(a)!')
+            res.redirect('/me')
+        } catch (error) {
+            next(error)
+        }
+    },
     registerPage: (req: express.Request, res: express.Response) => {
         res.render('signup')
     },

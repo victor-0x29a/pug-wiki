@@ -24,13 +24,24 @@ const TYPE_ERROR_USER_AGENT = 'O user_agent deve ser textual.'
 
 const INCORRECT_PERMISSION_LEVEL = 'Coloque o nível de permissão correto.'
 
+const usernameSchema = string().required(REQUIRED_USERNAME).min(5, MIN_USERNAME).max(20, MAX_USERNAME).typeError(TYPE_ERROR_USERNAME)
+const passwordSchema = string().required(REQUIRED_PASSWORD).min(8, MIN_PASSWORD).max(50, MAX_PASSWORD).typeError(TYPE_ERROR_PASSWORD)
+const repeatedPasswordSchema = string()
+    .oneOf([ref('password')], DIFF_REPEATED_PASSWORD)
+    .required(REQUIRED_REPEATED_PASSWORD)
+    .typeError(TYPE_ERROR_REPEATED_PASSWORD)
+const userAgentSchema = string().max(255, MAX_USER_AGENT).optional().nullable().typeError(TYPE_ERROR_USER_AGENT)
+const permissionSchema = number().oneOf([1, 2], INCORRECT_PERMISSION_LEVEL)
+
 export const IUserSchema = object().shape({
-    username: string().required(REQUIRED_USERNAME).min(5, MIN_USERNAME).max(20, MAX_USERNAME).typeError(TYPE_ERROR_USERNAME),
-    password: string().required(REQUIRED_PASSWORD).min(8, MIN_PASSWORD).max(50, MAX_PASSWORD).typeError(TYPE_ERROR_PASSWORD),
-    repeatedPassword: string()
-        .oneOf([ref('password')], DIFF_REPEATED_PASSWORD)
-        .required(REQUIRED_REPEATED_PASSWORD)
-        .typeError(TYPE_ERROR_REPEATED_PASSWORD),
-    user_agent: string().max(255, MAX_USER_AGENT).optional().nullable().typeError(TYPE_ERROR_USER_AGENT),
-    permission: number().oneOf([1, 2], INCORRECT_PERMISSION_LEVEL)
+    username: usernameSchema,
+    password: passwordSchema,
+    repeatedPassword: repeatedPasswordSchema,
+    user_agent: userAgentSchema,
+    permission: permissionSchema
+})
+
+export const IUserAuthSchema = object().shape({
+    username: usernameSchema,
+    password: passwordSchema
 })

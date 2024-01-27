@@ -1,8 +1,9 @@
 import { IUser } from "../dto";
 import { UserRepository } from "./repository";
 import { AppError } from "../../appError";
-import { IUserSchema } from './serializer'
-import { generateHash } from '../../utils'
+import { IUserSchema, IUserAuthSchema } from './serializer'
+import { generateHash, compareHash, Auth } from '../../utils'
+import { authDataRequest, AuthDataResponse } from '../../types'
 
 class Service {
     private readonly repository
@@ -43,6 +44,34 @@ class Service {
             }).catch((error) => {
                 throw new AppError(error.errors[0])
             })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async createAuth(data: authDataRequest): Promise<AuthDataResponse> {
+        try {
+            const VALID_DATA_MESSAGE = 'Confira se o nome de usuário ou senha são validos.'
+
+            const { username, password } = await IUserAuthSchema.validate(data)
+
+            const userData = await this.findByUsername(username)
+
+            if (!userData) {
+                throw new AppError(VALID_DATA_MESSAGE)
+            }
+
+            const isMatchPassword = compareHash(userData!.password, password)
+
+            if (!isMatchPassword) {
+                throw new AppError(VALID_DATA_MESSAGE)
+            }
+
+            const authRepository = new Auth()
+
+            return {
+                token: authRepository.generateToken(userData.permission)
+            }
         } catch (error) {
             throw error
         }
