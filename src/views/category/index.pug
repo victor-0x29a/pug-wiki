@@ -5,7 +5,8 @@ block layout-content
     +title("Categorias")
 
     ul.category-list
-        if categories
+        - var hasCategories = Boolean(categories.length)
+        if hasCategories
             for category in categories
                 li.category-item
                     a(href=`/category/${category.slug}`) #{category.label}
