@@ -5,7 +5,8 @@ block layout-content
     +title("Entre na sua conta")
 
     div.container.center
-        form.default-form
+        +warning()
+        form(method="post", action="/auth/signin").default-form
             section.group
                 p.high-size #{"Usuário"}
                 input(type="text").medium-size
