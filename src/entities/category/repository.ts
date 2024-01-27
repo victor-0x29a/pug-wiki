@@ -14,7 +14,7 @@ class Repository {
         }
     }
 
-    async delete(id: number): Promise<Partial<ICategory>> {
+    async delete(id: number) {
         try {
             return this.entity.delete({
                 where: { id }
@@ -24,7 +24,7 @@ class Repository {
         }
     }
 
-    async create(data: ICategory) {
+    async create(data: ICategory): Promise<ICategory> {
         try {
             return await this.entity.create({
                 data
@@ -35,6 +35,4 @@ class Repository {
     }
 }
 
-const CategoryRepository = new Repository
-
-export { CategoryRepository }
+export { Repository as CategoryRepository }
