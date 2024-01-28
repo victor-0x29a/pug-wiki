@@ -20,6 +20,6 @@ export const itemsNavBarLogged = [
     ...defaultItemsNavBar,
     {
         label: "Meu perfil",
-        href: "/me"
+        href: "/user/me"
     }
 ]
