@@ -4,6 +4,7 @@ import {
     string,
     ref
 } from 'yup'
+import { ADMIN_LEVEL, USER_LEVEL } from '../../constants'
 
 const REQUIRED_PASSWORD = 'A senha é obrigatória'
 const MIN_PASSWORD = 'A senha deve ter no mínimo 8 caracteres.'
@@ -31,7 +32,7 @@ const repeatedPasswordSchema = string()
     .required(REQUIRED_REPEATED_PASSWORD)
     .typeError(TYPE_ERROR_REPEATED_PASSWORD)
 const userAgentSchema = string().max(255, MAX_USER_AGENT).optional().nullable().typeError(TYPE_ERROR_USER_AGENT)
-const permissionSchema = number().oneOf([1, 2], INCORRECT_PERMISSION_LEVEL)
+const permissionSchema = number().oneOf([USER_LEVEL, ADMIN_LEVEL], INCORRECT_PERMISSION_LEVEL)
 
 export const IUserSchema = object().shape({
     username: usernameSchema,
