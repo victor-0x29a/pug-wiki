@@ -40,8 +40,8 @@ export const AuthController = {
 
             const { username } = req.body
             req.session.username = username
-
-            res.status(200).setHeader('authorization', token).redirect('/user/me')
+            req.session.authorization = token
+            res.status(200).redirect('/user/me')
         } catch (error) {
             next(error)
         }

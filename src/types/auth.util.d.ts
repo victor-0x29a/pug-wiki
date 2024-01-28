@@ -4,4 +4,5 @@ export interface tokenDecoded {
 
 export interface propertiesSession {
     username?: string
+    authorization?: string
 }

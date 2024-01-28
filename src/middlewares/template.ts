@@ -5,7 +5,7 @@ import { Auth } from "../utils";
 const authUtil = new Auth()
 
 export const TemplateMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization
+    const token = req.session.authorization
     const hasToken = Boolean(token)
     if (!hasToken) {
         res.locals.itemsNavBar = itemsNavBar

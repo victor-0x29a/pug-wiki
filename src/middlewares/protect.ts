@@ -7,22 +7,18 @@ const UNAUTHORIZED_ENDPOINT_REDIRECT = '/user/me'
 
 const authUtil = new Auth()
 
-const resetAuthorization = (res: express.Response) => {
-    return res.setHeader('authorization', "")
-}
-
 export const ProtectMiddleware = (permissionLevelRequired: 1 | 2) => (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization
+    const token = req.session.authorization
     const hasToken = Boolean(token)
     if (!hasToken) {
-        resetAuthorization(res)
+        authUtil.cleanAuthParams(req)
         return res.redirect(LOGIN_ENDPOINT_REDIRECT)
     }
 
     const isValidToken = authUtil.verifyToken(token!)
 
     if (!isValidToken) {
-        resetAuthorization(res)
+        authUtil.cleanAuthParams(req)
         return res.redirect(LOGIN_ENDPOINT_REDIRECT)
     }
 
