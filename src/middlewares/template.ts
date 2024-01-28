@@ -9,14 +9,14 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
     const hasToken = Boolean(token)
     if (!hasToken) {
         res.locals.itemsNavBar = itemsNavBar
-        next()
+        return next()
     }
 
     const isValidToken = authUtil.verifyToken(token!)
 
     if (!isValidToken) {
         res.locals.itemsNavBar = itemsNavBar
-        next()
+        return next()
     }
 
     res.locals.itemsNavBar = itemsNavBarLogged

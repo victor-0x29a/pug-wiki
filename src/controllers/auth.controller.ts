@@ -36,13 +36,12 @@ export const AuthController = {
     login: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             const { token } = await user.createAuth(req.body)
-            res.setHeader('authorization', token)
             req.flash('success', 'Bem-vindo(a)!')
 
             const { username } = req.body
             req.session.username = username
 
-            res.redirect('/user/me')
+            res.status(200).setHeader('authorization', token).redirect('/user/me')
         } catch (error) {
             next(error)
         }

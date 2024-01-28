@@ -16,20 +16,20 @@ export const ProtectMiddleware = (permissionLevelRequired: 1 | 2) => (req: Reque
     const hasToken = Boolean(token)
     if (!hasToken) {
         resetAuthorization(res)
-        res.redirect(LOGIN_ENDPOINT_REDIRECT)
+        return res.redirect(LOGIN_ENDPOINT_REDIRECT)
     }
 
     const isValidToken = authUtil.verifyToken(token!)
 
     if (!isValidToken) {
         resetAuthorization(res)
-        res.redirect(LOGIN_ENDPOINT_REDIRECT)
+        return res.redirect(LOGIN_ENDPOINT_REDIRECT)
     }
 
     const { permissionLevel } = authUtil.decodeToken(token!)
 
     if (permissionLevel < permissionLevelRequired) {
-        res.redirect(UNAUTHORIZED_ENDPOINT_REDIRECT)
+        return res.redirect(UNAUTHORIZED_ENDPOINT_REDIRECT)
     }
 
     next()
