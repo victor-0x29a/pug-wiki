@@ -1,7 +1,24 @@
 import { NextFunction, Request, Response } from "express";
-import { itemsNavBar } from "../constants";
+import { itemsNavBar, itemsNavBarLogged } from "../constants";
+import { Auth } from "../utils";
+
+const authUtil = new Auth()
 
 export const TemplateMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    res.locals.itemsNavBar = itemsNavBar
+    const token = req.headers.authorization
+    const hasToken = Boolean(token)
+    if (!hasToken) {
+        res.locals.itemsNavBar = itemsNavBar
+        next()
+    }
+
+    const isValidToken = authUtil.verifyToken(token!)
+
+    if (!isValidToken) {
+        res.locals.itemsNavBar = itemsNavBar
+        next()
+    }
+
+    res.locals.itemsNavBar = itemsNavBarLogged
     next()
 }
