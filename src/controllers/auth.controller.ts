@@ -1,6 +1,14 @@
 import { UserService } from "../entities"
 import express from 'express'
 import { UserRepository } from "../entities/user/repository"
+import { SessionData } from 'express-session';
+import { propertiesSession } from '../types/auth.util'
+
+declare module 'express' {
+    export interface Request {
+        session: SessionData & propertiesSession
+    }
+}
 
 const user = new UserService(new UserRepository())
 
@@ -30,6 +38,10 @@ export const AuthController = {
             const { token } = await user.createAuth(req.body)
             res.setHeader('authorization', token)
             req.flash('success', 'Bem-vindo(a)!')
+
+            const { username } = req.body
+            req.session.username = username
+
             res.redirect('/user/me')
         } catch (error) {
             next(error)
