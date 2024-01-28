@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { AppBrokedMiddleware, TemplateMiddleware } from "../middlewares"
+import { ProtectMiddleware } from "../middlewares"
 
 class Protected {
     public readonly router = Router()
@@ -20,7 +21,7 @@ class Protected {
     }
 
     private loadRoutes(): void {
-        this.router.get("/me", (req, res) => {
+        this.router.get("/me", ProtectMiddleware(1), (req, res) => {
             res.render("me")
         })
     }

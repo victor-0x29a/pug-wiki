@@ -1,4 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken'
+import express from 'express'
 import { tokenDecoded } from '../types'
 
 const { JWT_SECRET } = process.env
@@ -22,6 +23,10 @@ class Auth {
         return {
             permissionLevel: tokenDecoded['permissionLevel']
         }
+    }
+    cleanAuthParams(request: express.Request) {
+        request.session.username = ''
+        request.session.authorization = ''
     }
 }
 

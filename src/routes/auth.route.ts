@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AuthController } from "../controllers";
+import { UnableMiddleware } from "../middlewares";
 
 class Auth {
     public readonly router = Router()
@@ -10,10 +11,10 @@ class Auth {
     }
 
     private loadRoutes(): void {
-        this.router.get("/signin", this.controller.loginPage)
-        this.router.post("/signin", this.controller.login)
-        this.router.post("/signup", this.controller.register)
-        this.router.get("/signup", this.controller.registerPage)
+        this.router.get("/signin", UnableMiddleware, this.controller.loginPage)
+        this.router.post("/signin", UnableMiddleware, this.controller.login)
+        this.router.post("/signup", UnableMiddleware, this.controller.register)
+        this.router.get("/signup", UnableMiddleware, this.controller.registerPage)
     }
 }
 
