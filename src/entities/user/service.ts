@@ -72,7 +72,10 @@ class Service {
             return {
                 token: authRepository.generateToken(userData.permission)
             }
-        } catch (error) {
+        } catch (error: any) {
+            if (error?.name === 'ValidationError') {
+                throw new AppError(error.errors[0])
+            }
             throw error
         }
     }

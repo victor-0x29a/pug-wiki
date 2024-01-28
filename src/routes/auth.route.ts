@@ -10,11 +10,6 @@ class Auth {
     }
 
     private loadRoutes(): void {
-        this.router.post("/signin", (req, res) => {
-            return res.status(200).json({
-                token: "hash"
-            })
-        })
         this.router.get("/signin", this.controller.loginPage)
         this.router.post("/signin", this.controller.login)
         this.router.post("/signup", this.controller.register)

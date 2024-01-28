@@ -9,10 +9,10 @@ block layout-content
         form(method="post", action="/auth/signin").default-form
             section.group
                 p.high-size #{"Usuário"}
-                input(type="text").medium-size
+                input(type="text", name="username").medium-size
             section.group
                 p.high-size #{"Senha"}
-                input(type="password").medium-size
+                input(type="password", name="password").medium-size
             section.group
                 button(type="submit").medium-size #{"Entrar"}
             section.group.details-form

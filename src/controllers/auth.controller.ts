@@ -30,7 +30,7 @@ export const AuthController = {
             const { token } = await user.createAuth(req.body)
             res.setHeader('authorization', token)
             req.flash('success', 'Bem-vindo(a)!')
-            res.redirect('/me')
+            res.redirect('/user/me')
         } catch (error) {
             next(error)
         }
