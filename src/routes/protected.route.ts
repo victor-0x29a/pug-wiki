@@ -16,7 +16,6 @@ class Protected {
     }
 
     private readonly loadSecurityMiddlewares = (): void => {
-        // TODO: Add the middleware to protect all routes
         this.router.use(AppBrokedMiddleware)
     }
 
