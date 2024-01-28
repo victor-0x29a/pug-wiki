@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { itemsNavBar, itemsNavBarLogged } from "../constants";
+import { ADMIN_LEVEL, itemsNavBar, itemsNavBarAdmin, itemsNavBarLogged } from "../constants";
 import { Auth } from "../utils";
 
-const authUtil = new Auth()
+const authInstance = new Auth()
 
 export const TemplateMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const token = req.session.authorization
@@ -12,13 +12,16 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
         return next()
     }
 
-    const isValidToken = authUtil.verifyToken(token!)
+    const isValidToken = authInstance.verifyToken(token!)
 
     if (!isValidToken) {
         res.locals.itemsNavBar = itemsNavBar
         return next()
     }
 
-    res.locals.itemsNavBar = itemsNavBarLogged
+    const { permissionLevel } = authInstance.decodeToken(token!)
+    const isAdmin = permissionLevel === ADMIN_LEVEL
+
+    res.locals.itemsNavBar = isAdmin ? itemsNavBarAdmin : itemsNavBarLogged
     next()
 }

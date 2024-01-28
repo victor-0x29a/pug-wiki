@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { AppBrokedMiddleware, TemplateMiddleware } from "../middlewares"
-import { CategoryController } from '../controllers'
+import { CategoryController, DefaultController } from '../controllers'
 
 class Default {
     public readonly router = Router()
@@ -20,14 +20,8 @@ class Default {
     }
 
     private loadRoutes(): void {
-        this.router.get("/", (req, res) => {
-            res.render("index")
-        })
-        this.router.get("/help", (req, res) => {
-            res.render("help", {
-                walletbtc: process.env.WALLET_BTC
-            })
-        })
+        this.router.get("/", DefaultController.index)
+        this.router.get("/help", DefaultController.help)
         this.router.get("/category", CategoryController.getAll)
     }
 }
