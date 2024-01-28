@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 
 import { AppBrokedMiddleware, SassMiddleware } from './middlewares'
-import { DefaultRoute, AuthRoute } from './routes'
+import { DefaultRoute, AuthRoute, ProtectedRoute } from './routes'
 import bodyParser from 'body-parser'
 import flash from 'express-flash'
 import cookieParser from 'cookie-parser'
@@ -32,6 +32,7 @@ class Server {
     private readonly loadRoutes = (): void => {
         this.app.use("/", DefaultRoute.router)
         this.app.use("/auth", AuthRoute.router)
+        this.app.use("/user", ProtectedRoute.router)
     }
 
     private readonly loadMiddlewares = (): void => {
