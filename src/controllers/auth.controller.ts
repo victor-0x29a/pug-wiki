@@ -1,5 +1,5 @@
 import { UserService } from "../entities"
-import express from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { UserRepository } from "../entities/user/repository"
 import { SessionData } from 'express-session';
 import { propertiesSession } from '../types/auth.util'
@@ -13,7 +13,7 @@ declare module 'express' {
 const user = new UserService(new UserRepository())
 
 export const AuthController = {
-    register: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    register: async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { password, repeatedPassword, username } = req?.body
 
@@ -33,7 +33,7 @@ export const AuthController = {
             next(error)
         }
     },
-    login: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    login: async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { token } = await user.createAuth(req.body)
             req.flash('success', 'Bem-vindo(a)!')
@@ -46,10 +46,10 @@ export const AuthController = {
             next(error)
         }
     },
-    registerPage: (req: express.Request, res: express.Response) => {
+    registerPage: (req: Request, res: Response) => {
         res.render('signup')
     },
-    loginPage: (req: express.Request, res: express.Response) => {
+    loginPage: (req: Request, res: Response) => {
         res.render('signin')
     }
 }
