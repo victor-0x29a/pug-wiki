@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 
 class ExpressUtils {
-    PATH_REDIRECT = ''
+    public PATH_REDIRECT = ''
     constructor(pathRedirect: string) {
         this.PATH_REDIRECT = pathRedirect
     }
