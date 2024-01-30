@@ -40,7 +40,7 @@ class Server {
     private readonly loadRoutes = (): void => {
         this.app.use("/", DefaultRoute.router)
         this.app.use("/auth", AuthRoute.router)
-        this.app.use("/user", ProtectedRoute.router)
+        this.app.use("/backoffice", ProtectedRoute.router)
     }
 
     private readonly loadMiddlewares = (): void => {
