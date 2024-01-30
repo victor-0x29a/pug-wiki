@@ -21,7 +21,7 @@ export const itemsNavBarLogged = [
     ...defaultItemsNavBar,
     {
         label: "Meu perfil",
-        href: "/user/me"
+        href: "/backoffice/me"
     }
 ]
 export const itemsNavBarAdmin = [
