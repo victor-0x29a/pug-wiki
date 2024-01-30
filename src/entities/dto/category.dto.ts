@@ -3,3 +3,7 @@ export type ICategory = {
     label: string
     slug: string
 }
+
+export type ICategoryFind = {
+    slug: string
+}

@@ -16,3 +16,7 @@ export const ICategorySchema = object().shape({
     label: labelSchema,
     slug: slugSchema
 })
+
+export const ICategoryFindSchema = object().shape({
+    slug: slugSchema
+})

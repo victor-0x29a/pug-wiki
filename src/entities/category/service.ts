@@ -1,9 +1,8 @@
 import { AppError } from "../../appError";
-import { ICategory } from "../dto/category.dto";
+import { ICategory, ICategoryFind } from "../dto/category.dto";
 import { CategoryRepository } from "./repository";
 import { parseCategory } from "./parser";
-import { ICategorySchema } from "./serializer"
-import yup from 'yup'
+import { ICategoryFindSchema, ICategorySchema } from "./serializer"
 
 class Service {
     private readonly repository;
@@ -26,10 +25,37 @@ class Service {
         try {
             const schemaValidation = await ICategorySchema.validate(data)
 
+            const hasCategoryWithSameSlug = await this.repository.findBySlug(schemaValidation.slug)
+
+            if (hasCategoryWithSameSlug) {
+                throw new AppError('Já existe uma categoria com o mesmo slug.', true, 'Já existe uma categoria com o mesmo slug.', 409)
+            }
+
             return await this.repository.create(schemaValidation)
         } catch (error: any) {
             if (error?.name === 'ValidationError') {
-                throw new AppError(error.errors[0])
+                throw new AppError(error.errors[0], true, error.errors[0], 422)
+            } else {
+                throw error
+            }
+        }
+    }
+
+    async delete(data: ICategoryFind) {
+        try {
+            const { slug } = await ICategoryFindSchema.validate(data)
+            const category = await this.repository.findBySlug(slug)
+
+            if (!category) {
+                throw new AppError('Categoria inexistente.', true, 'Categoria inexistente.', 404)
+            }
+
+            const { id } = category
+
+            return this.repository.delete(id!)
+        } catch (error: any) {
+            if (error?.name === 'ValidationError') {
+                throw new AppError(error.errors[0], true, error.errors[0], 422)
             } else {
                 throw error
             }

@@ -33,6 +33,18 @@ class Repository {
             throw error
         }
     }
+
+    async findBySlug(slug: string): Promise<ICategory | null> {
+        try {
+            return await this.entity.findFirst({
+                where: {
+                    slug
+                }
+            })
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export { Repository as CategoryRepository }

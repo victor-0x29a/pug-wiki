@@ -13,9 +13,19 @@ export const CategoryController = {
                     categories: data
                 })
             })
-            .catch((err) => {
-                next(err)
-            })
+            .catch(next)
     },
-    /* TODO: Route & page to create a category */
+    async deleteOne(req: Request, res: Response, next: NextFunction) {
+        return category.delete({
+            slug: req?.params?.slug
+        }).then(() => {
+            return res.status(204).json()
+        }).catch(next)
+    },
+    async createOne(req: Request, res: Response, next: NextFunction) {
+        return category.create(req.body)
+            .then(() => {
+                return res.status(204).json()
+            }).catch(next)
+    }
 }

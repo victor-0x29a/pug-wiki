@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { AppBrokedMiddleware, TemplateMiddleware } from "../middlewares"
 import { ProtectMiddleware } from "../middlewares"
-import { UserController } from "../controllers"
+import { CategoryController, UserController } from "../controllers"
 
 class Protected {
     public readonly router = Router()
@@ -22,6 +22,8 @@ class Protected {
 
     private loadRoutes(): void {
         this.router.get("/me", ProtectMiddleware(1), UserController.me)
+        this.router.delete("/category/:slug", ProtectMiddleware(2), CategoryController.deleteOne)
+        this.router.post("/category/", ProtectMiddleware(2), CategoryController.createOne)
     }
 }
 
