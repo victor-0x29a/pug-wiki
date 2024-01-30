@@ -1,31 +1,30 @@
-import express from 'express'
 import { NextFunction, Request, Response } from "express";
-import { Auth } from "../utils";
+import { Auth, ExpressUtils } from "../utils";
 
 const LOGIN_ENDPOINT_REDIRECT = '/auth/signin'
-const UNAUTHORIZED_ENDPOINT_REDIRECT = '/user/me'
+const UNAUTHORIZED_ENDPOINT_REDIRECT = '/backoffice/me'
 
-const authUtil = new Auth()
+const authInstance = new Auth()
 
 export const ProtectMiddleware = (permissionLevelRequired: 1 | 2) => (req: Request, res: Response, next: NextFunction) => {
     const token = req.session.authorization
     const hasToken = Boolean(token)
     if (!hasToken) {
-        authUtil.cleanAuthParams(req)
-        return res.redirect(LOGIN_ENDPOINT_REDIRECT)
+        authInstance.cleanAuthParams(req)
+        return new ExpressUtils(LOGIN_ENDPOINT_REDIRECT).Unauthorized(req, res)
     }
 
-    const isValidToken = authUtil.verifyToken(token!)
+    const isValidToken = authInstance.verifyToken(token!)
 
     if (!isValidToken) {
-        authUtil.cleanAuthParams(req)
-        return res.redirect(LOGIN_ENDPOINT_REDIRECT)
+        authInstance.cleanAuthParams(req)
+        return new ExpressUtils(LOGIN_ENDPOINT_REDIRECT).Unauthorized(req, res)
     }
 
-    const { permissionLevel } = authUtil.decodeToken(token!)
+    const { permissionLevel } = authInstance.decodeToken(token!)
 
     if (permissionLevel < permissionLevelRequired) {
-        return res.redirect(UNAUTHORIZED_ENDPOINT_REDIRECT)
+        return new ExpressUtils(UNAUTHORIZED_ENDPOINT_REDIRECT).Unauthorized(req, res)
     }
 
     next()

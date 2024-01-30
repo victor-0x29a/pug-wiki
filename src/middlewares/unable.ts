@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { Auth } from "../utils";
+import { Auth, ExpressUtils } from "../utils";
 
-const ENDPOINT_REDIRECT = '/user/me'
+const ENDPOINT_REDIRECT = '/backoffice/me'
 
 const authUtil = new Auth()
 
@@ -19,5 +19,5 @@ export const UnableMiddleware = (req: Request, res: Response, next: NextFunction
         return next()
     }
 
-    return res.redirect(ENDPOINT_REDIRECT)
+    new ExpressUtils(ENDPOINT_REDIRECT).Unauthorized(req, res)
 }
