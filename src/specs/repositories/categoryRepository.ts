@@ -26,6 +26,13 @@ class Repository {
                 ...data, id: this.categories.length + 1
             }
             return Boolean(this.categories.push(payloadToCreate)) && payloadToCreate
+        },
+        find: async (idToFind?: number, slugToFind?: string) => {
+            if (idToFind) {
+                return await this.categories.find(({ id }) => id === idToFind)
+            } else {
+                return await this.categories.find(({ slug }) => slug === slugToFind)
+            }
         }
     }
 
@@ -63,6 +70,15 @@ class Repository {
             return await this.entity.create({
                 data
             })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async findBySlug(slug: string) {
+        try {
+            this.checkHasConnection()
+            return await this.entity.find(undefined, slug)
         } catch (error) {
             throw error
         }

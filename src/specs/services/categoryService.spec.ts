@@ -24,7 +24,7 @@ test('should doesnt create a category without slug', async () => {
         "label": "foo",
         "slug": ""
     }
-    await expect(async () => await service.create(data)).rejects.toEqual(new AppError("O slug é obrigatório."))
+    await expect(async () => await service.create(data)).rejects.toEqual(new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422))
 })
 
 
