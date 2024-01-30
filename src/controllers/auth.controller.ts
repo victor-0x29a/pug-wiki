@@ -41,7 +41,7 @@ export const AuthController = {
             const { username } = req.body
             req.session.username = username
             req.session.authorization = token
-            res.status(200).redirect('/user/me')
+            res.status(200).redirect('/backoffice/me')
         } catch (error) {
             next(error)
         }
