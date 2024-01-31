@@ -1,0 +1,25 @@
+@import 'vars';
+
+.margin-right {
+    margin-right: $margin-default;
+}
+
+.margin-left {
+    margin-left: $margin-default;
+}
+
+.margin-top {
+    margin-top: $margin-default;
+}
+
+.margin-top-20 {
+    margin-top: $margin-default * 2;
+}
+
+.margin-bottom {
+    margin-bottom: $margin-default;
+}
+
+.text-center {
+    text-align: center;
+}
