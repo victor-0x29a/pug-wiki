@@ -19,7 +19,9 @@ class Repository {
             return Promise.resolve(await this.categories)
         },
         delete: async ({ where }: deleteProps) => {
-            return Promise.resolve(this.categories = await this.categories.filter(category => category.id !== where.id))
+            const entityToDelete = this.categories.find(({ id }) => id === where.id)
+            this.categories = await this.categories.filter(category => category.id !== where.id)
+            return entityToDelete
         },
         create: async ({ data }: createProps) => {
             const payloadToCreate = {

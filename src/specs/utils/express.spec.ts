@@ -1,7 +1,34 @@
 // @ts-nocheck
 import { ExpressUtils } from "../../utils";
 
-import { request, response } from './util.mock'
+export const response = {
+    redirect: function (path: string) {
+        return path
+    },
+    status: function () {
+        return {
+            json: function () {
+                return true
+            }
+        }
+    },
+}
+
+export const request = (method: string) => {
+    return {
+        method,
+        status: function () {
+            return {
+                json: function () {
+                    return true
+                }
+            }
+        },
+        redirect: function (path: string) {
+            return path
+        }
+    }
+}
 
 test('should create an instance ExpressUtils with X path', () => {
     const ExpressUtilsInstance = new ExpressUtils('X')

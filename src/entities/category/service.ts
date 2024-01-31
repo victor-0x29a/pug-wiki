@@ -41,7 +41,7 @@ class Service {
         }
     }
 
-    async delete(data: ICategoryFind) {
+    async delete(data: Partial<ICategoryFind>): Promise<ICategoryFind> {
         try {
             const { slug } = await ICategoryFindSchema.validate(data)
             const category = await this.repository.findBySlug(slug)
@@ -52,7 +52,7 @@ class Service {
 
             const { id } = category
 
-            return this.repository.delete(id!)
+            return this.repository.delete(id!) as Promise<ICategoryFind>
         } catch (error: any) {
             if (error?.name === 'ValidationError') {
                 throw new AppError(error.errors[0], true, error.errors[0], 422)

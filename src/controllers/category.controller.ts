@@ -18,7 +18,7 @@ export const CategoryController = {
     async deleteOne(req: Request, res: Response, next: NextFunction) {
         return category.delete({
             slug: req?.params?.slug
-        }).then(() => {
+        }).then((e) => {
             return res.status(204).json()
         }).catch(next)
     },

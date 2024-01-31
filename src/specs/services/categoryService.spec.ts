@@ -61,7 +61,7 @@ test('should doesnt list all categories when havent database connection', async 
     expect(async () => await service.findAll()).rejects.toEqual(new AppError('Db connection.'))
 })
 
-test('should doesnt list all categories when havent database connection', async () => {
+test('should doesnt create a category when havent database connection', async () => {
     const repository = new CategoryRepository()
 
     repository.hasDbConnection = false
@@ -73,4 +73,51 @@ test('should doesnt list all categories when havent database connection', async 
     }
 
     expect(async () => await service.create(data)).rejects.toEqual(new AppError('Db connection.'))
+})
+
+test('should doesnt create a category with slug from other category', async () => {
+    const slug = "foo-bar"
+    const repository = new CategoryRepository()
+    const service = new CategoryService(repository)
+    const data = {
+        "label": "foo",
+        slug
+    }
+    const _firstRequest = await service.create(data)
+
+    await expect(async () => await service.create(data)).rejects.toEqual(new AppError("Já existe uma categoria com o mesmo slug.", true, "Já existe uma categoria com o mesmo slug.", 409))
+})
+
+test('should delete a category', async () => {
+    const slug = "foo-bar"
+    const repository = new CategoryRepository()
+    const service = new CategoryService(repository)
+    let data = {
+        "label": "foo",
+        slug
+    }
+    const _createRequest = await service.create(data)
+    const deleteRequest = await service.delete({ slug })
+
+    data = {
+        "id": 1,
+        ...data
+    }
+    await expect(deleteRequest).toEqual(data)
+})
+
+test('should not delete a nonexistent category', async () => {
+    const repository = new CategoryRepository()
+    const service = new CategoryService(repository)
+
+    await expect(async () => await service.delete({ slug: 'foo' }))
+        .rejects.toEqual(new AppError('Categoria inexistente.', true, 'Categoria inexistente.', 404))
+})
+
+test('should not delete a category without slug', async () => {
+    const repository = new CategoryRepository()
+    const service = new CategoryService(repository)
+
+    await expect(async () => await service.delete({ slug: '' }))
+        .rejects.toEqual(new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422))
 })
