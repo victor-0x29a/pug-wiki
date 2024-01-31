@@ -12,7 +12,7 @@ class Service {
         this.repository = repository
     }
 
-    async findByUsername(username: string): Promise<IUser | null> {
+    async find(username: string): Promise<IUser | null> {
         try {
             const entity = await this.repository.findOne(username)
 
@@ -24,28 +24,29 @@ class Service {
 
     async create(data: Partial<IUser>): Promise<IUser> {
         try {
-            return IUserSchema.validate(data).then(async (dataParsed) => {
-                const hasUserWithSameNick = await this.findByUsername(dataParsed.username!)
+            const dataParsed = await IUserSchema.validate(data)
+            const hasUserWithSameNick = await this.find(dataParsed.username!)
 
-                if (hasUserWithSameNick) {
-                    throw new AppError('Coloque outro nome de usuário.')
-                }
+            if (hasUserWithSameNick) {
+                throw new AppError('Coloque outro nome de usuário.')
+            }
 
-                const passwordHashed = generateHash(dataParsed.password)
+            const passwordHashed = generateHash(dataParsed.password)
 
-                const userCreated = await this.repository.create({
-                    username: dataParsed.username,
-                    password: passwordHashed,
-                    permission: 1,
-                    user_agent: dataParsed.user_agent!
-                }) as IUser
+            const userCreated = await this.repository.create({
+                username: dataParsed.username,
+                password: passwordHashed,
+                permission: 1,
+                user_agent: dataParsed.user_agent!
+            }) as IUser
 
-                return userCreated
-            }).catch((error) => {
+            return userCreated
+        } catch (error: any) {
+            if (error?.name === 'ValidationError') {
                 throw new AppError(error.errors[0])
-            })
-        } catch (error) {
-            throw error
+            } else {
+                throw error
+            }
         }
     }
 
@@ -55,13 +56,13 @@ class Service {
 
             const { username, password } = await IUserAuthSchema.validate(data)
 
-            const userData = await this.findByUsername(username)
+            const userData = await this.find(username)
 
             if (!userData) {
                 throw new AppError(VALID_DATA_MESSAGE)
             }
 
-            const isMatchPassword = compareHash(userData!.password, password)
+            const isMatchPassword = await compareHash(userData!.password, password)
 
             if (!isMatchPassword) {
                 throw new AppError(VALID_DATA_MESSAGE)
