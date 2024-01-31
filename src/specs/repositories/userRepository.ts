@@ -3,7 +3,8 @@ import { IUser } from '../../entities/dto'
 
 interface deleteProps {
     where: {
-        id: number
+        id?: number
+        username?: string
     }
 }
 
@@ -13,7 +14,8 @@ interface createProps {
 
 interface findFirstProps {
     where: {
-        username: string
+        id?: number
+        username?: string
     }
 }
 
@@ -25,7 +27,13 @@ class Repository {
             return (await this.users)
         },
         delete: async ({ where }: deleteProps) => {
-            return (this.users = await this.users.filter(user => user.id !== where.id))
+            const userDeleted = this.users.find(({ id }) => id === where.id)
+            if (!userDeleted) {
+                return null
+            }
+            this.users = this.users.filter(user => user.id !== where.id)
+            return userDeleted
+
         },
         create: async ({ data }: createProps) => {
             const payloadToCreate = {
@@ -34,11 +42,14 @@ class Repository {
             return Boolean(this.users.push(payloadToCreate)) && payloadToCreate
         },
         findFirst: async ({ where }: findFirstProps) => {
-            const user = this.users.filter((user) => user.username === where.username)
-            if (!user) {
-                return null
+            let data = null as IUser | null
+            if (where.id) {
+                data = this.users.filter(({ id }) => id === where?.id)[0]
+            } else {
+                data = this.users.filter(({ username }) => username === where.username)[0]
             }
-            return user
+            if (!data) return null
+            return data
         }
     }
 
@@ -72,7 +83,7 @@ class Repository {
         }
     }
 
-    async delete(id: number) {
+    async delete(id: number): Promise<IUser | null> {
         try {
             this.checkHasConnection()
             const whereData = { id }
