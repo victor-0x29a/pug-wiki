@@ -23,5 +23,8 @@ export const TemplateMiddleware = (req: Request, res: Response, next: NextFuncti
     const isAdmin = permissionLevel === ADMIN_LEVEL
 
     res.locals.itemsNavBar = isAdmin ? itemsNavBarAdmin : itemsNavBarLogged
+    res.locals.profile = {
+        username: req.session.username
+    }
     next()
 }
