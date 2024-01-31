@@ -20,11 +20,14 @@ test('should create a category', async () => {
 test('should doesnt create a category without slug', async () => {
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
-    const data = {
+    const payloadToSend = {
         "label": "foo",
         "slug": ""
     }
-    await expect(async () => await service.create(data)).rejects.toEqual(new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422))
+
+    const errorExpected = new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422)
+
+    await expect(async () => await service.create(payloadToSend)).rejects.toEqual(errorExpected)
 })
 
 
@@ -58,7 +61,9 @@ test('should doesnt list all categories when havent database connection', async 
 
     const service = new CategoryService(repository)
 
-    expect(async () => await service.findAll()).rejects.toEqual(new AppError('Db connection.'))
+    const errorExpected = new AppError('Db connection.')
+
+    expect(async () => await service.findAll()).rejects.toEqual(errorExpected)
 })
 
 test('should doesnt create a category when havent database connection', async () => {
@@ -67,25 +72,30 @@ test('should doesnt create a category when havent database connection', async ()
     repository.hasDbConnection = false
 
     const service = new CategoryService(repository)
-    const data = {
+
+    const payloadToSend = {
         "label": "foo",
         "slug": "bar-slug"
     }
 
-    expect(async () => await service.create(data)).rejects.toEqual(new AppError('Db connection.'))
+    const errorExpected = new AppError('Db connection.')
+
+    expect(async () => await service.create(payloadToSend)).rejects.toEqual(errorExpected)
 })
 
 test('should doesnt create a category with slug from other category', async () => {
     const slug = "foo-bar"
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
-    const data = {
+    const creationPayload = {
         "label": "foo",
         slug
     }
-    const _firstRequest = await service.create(data)
+    const _firstRequest = await service.create(creationPayload)
 
-    await expect(async () => await service.create(data)).rejects.toEqual(new AppError("Já existe uma categoria com o mesmo slug.", true, "Já existe uma categoria com o mesmo slug.", 409))
+    const errorExpected = new AppError("Já existe uma categoria com o mesmo slug.", true, "Já existe uma categoria com o mesmo slug.", 409)
+
+    await expect(async () => await service.create(creationPayload)).rejects.toEqual(errorExpected)
 })
 
 test('should delete a category', async () => {
@@ -110,16 +120,22 @@ test('should not delete a nonexistent category', async () => {
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
 
-    await expect(async () => await service.delete({ slug: 'foo' }))
-        .rejects.toEqual(new AppError('Categoria inexistente.', true, 'Categoria inexistente.', 404))
+    const payloadToSend = { slug: 'foo' }
+    const errorExpected = new AppError('Categoria inexistente.', true, 'Categoria inexistente.', 404)
+
+    await expect(async () => await service.delete(payloadToSend))
+        .rejects.toEqual(errorExpected)
 })
 
 test('should not delete a category without slug', async () => {
     const repository = new CategoryRepository()
     const service = new CategoryService(repository)
 
-    await expect(async () => await service.delete({ slug: '' }))
-        .rejects.toEqual(new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422))
+    const payloadToSend = { slug: '' }
+    const errorExpected = new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422)
+
+    await expect(async () => await service.delete(payloadToSend))
+        .rejects.toEqual(errorExpected)
 })
 
 test('should try delete a category when havent database connection', async () => {
@@ -128,6 +144,9 @@ test('should try delete a category when havent database connection', async () =>
 
     const service = new CategoryService(repository)
 
-    await expect(async () => await service.delete({ slug: 'foo' }))
-        .rejects.toEqual(new AppError('Db connection.'))
+    const payloadToSend = { slug: 'foo' }
+    const errorExpected = new AppError('Db connection.')
+
+    await expect(async () => await service.delete(payloadToSend))
+        .rejects.toEqual(errorExpected)
 })
