@@ -226,3 +226,10 @@
 .width-auto {
     width: auto;
 }
+
+.btn-danger {
+    background-color: $btn-danger-bg;
+    &:hover {
+        background-color: $btn-danger-bg-on-hover;
+    }
+}
