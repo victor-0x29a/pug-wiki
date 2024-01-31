@@ -2,5 +2,9 @@ extends ../layout
 include ../components
 
 block layout-content
+    - var usernameProfile = profile?.username || 'Nenhum usuário'
     +warning()
-    +text('Me page')
+    div.container.margin-top-20
+        section.row.center
+            h3.medium-size.margin-right.text-center #{usernameProfile}
+            button(type="button").medium-size.width-auto #{"Trocar senha"}
