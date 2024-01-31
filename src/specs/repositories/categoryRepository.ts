@@ -29,12 +29,8 @@ class Repository {
             }
             return Boolean(this.categories.push(payloadToCreate)) && payloadToCreate
         },
-        find: async (idToFind?: number, slugToFind?: string) => {
-            if (idToFind) {
-                return await this.categories.find(({ id }) => id === idToFind)
-            } else {
-                return await this.categories.find(({ slug }) => slug === slugToFind)
-            }
+        find: async (slugToFind: string) => {
+            return await this.categories.find(({ slug }) => slug === slugToFind)
         }
     }
 
@@ -80,7 +76,7 @@ class Repository {
     async findBySlug(slug: string) {
         try {
             this.checkHasConnection()
-            return await this.entity.find(undefined, slug)
+            return await this.entity.find(slug)
         } catch (error) {
             throw error
         }

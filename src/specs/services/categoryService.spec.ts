@@ -121,3 +121,13 @@ test('should not delete a category without slug', async () => {
     await expect(async () => await service.delete({ slug: '' }))
         .rejects.toEqual(new AppError("O slug é obrigatório.", true, "O slug é obrigatório.", 422))
 })
+
+test('should try delete a category when havent database connection', async () => {
+    const repository = new CategoryRepository()
+    repository.hasDbConnection = false
+
+    const service = new CategoryService(repository)
+
+    await expect(async () => await service.delete({ slug: 'foo' }))
+        .rejects.toEqual(new AppError('Db connection.'))
+})
