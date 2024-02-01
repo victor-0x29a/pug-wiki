@@ -9,7 +9,8 @@
     "test-config": "jest --init",
     "dev": "export NODE_ENV=dev && nodemon src/index.ts",
     "test": "jest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "npx tsc"
   },
   "husky": {
     "hooks": {
