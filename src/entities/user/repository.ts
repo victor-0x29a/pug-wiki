@@ -2,9 +2,9 @@ import { user } from '../../database'
 import { IUser } from '../dto'
 
 class Repository {
-    private readonly entity = user
+    private entity = user
 
-    async findAll(): Promise<IUser[]> {
+    async findAll (): Promise<IUser[]> {
         try {
             const entities = await this.entity.findMany() as IUser[]
 
@@ -14,7 +14,7 @@ class Repository {
         }
     }
 
-    async findOne(username: string): Promise<IUser | null> {
+    async findOne (username: string): Promise<IUser | null> {
         try {
             const whereData = { username }
 
@@ -28,7 +28,7 @@ class Repository {
         }
     }
 
-    async delete(id: number): Promise<IUser | null> {
+    async delete (id: number): Promise<IUser | null> {
         try {
             const whereData = { id }
 
@@ -40,7 +40,7 @@ class Repository {
         }
     }
 
-    async create(data: IUser) {
+    async create (data: IUser) {
         try {
             return await this.entity.create({
                 data
