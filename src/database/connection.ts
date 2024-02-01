@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
-const { PrismaClient: IPrismaClient } = require('@prisma/client')
-
-const DATABASE = new IPrismaClient({
+const DATABASE = new PrismaClient({
     errorFormat: 'minimal'
 }) as PrismaClient
 
