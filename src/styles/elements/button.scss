@@ -1,5 +1,23 @@
 @import "../vars";
 
+button {
+    text-align: center;
+    border: 0;
+    font-size: calc(#{$text-size} + 0.3rem);
+    border-radius: $bd-radius;
+    color: white;
+    background: $btn-bg;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition-duration: $delay;
+    cursor: pointer;
+    width: $width-default;
+    padding: $pd-default;
+    &:hover {
+        background: $btn-bg-on-hover;
+    }
+}
+
 .btn-danger {
     background-color: $btn-danger-bg;
     &:hover {

@@ -1,0 +1,17 @@
+@import "../vars";
+
+input {
+    border: 0;
+    border-radius: $bd-radius;
+    background-color: $input-bg-color;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    outline: 0;
+    padding: $pd-default;
+    width: $width-default;
+
+    &::after {
+        border: 0;
+        outline: 0;
+    }
+}

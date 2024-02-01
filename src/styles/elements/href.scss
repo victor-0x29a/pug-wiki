@@ -1,0 +1,7 @@
+@import "../vars";
+
+a {
+    &:hover {
+        color: $second-color;
+    }
+}
