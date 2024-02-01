@@ -1,13 +1,16 @@
 version: '3.3'
 services:
   db:
+    env_file:
+      - path: ./.env.staging
+        required: true
     image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'pug-db'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'root@admin'
-      MYSQL_ROOT_PASSWORD: 'root@admin'
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - '3306:3306'
     expose:
