@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { CategoryRepository } from '../repositories/categoryRepository'
 import { CategoryService } from '../../entities/category'
@@ -91,6 +92,7 @@ test('should doesnt create a category with slug from other category', async () =
         "label": "foo",
         slug
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _firstRequest = await service.create(creationPayload)
 
     const errorExpected = new AppError("Já existe uma categoria com o mesmo slug.", true, "Já existe uma categoria com o mesmo slug.", 409)
@@ -106,6 +108,7 @@ test('should delete a category', async () => {
         "label": "foo",
         slug
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _createRequest = await service.create(data)
     const deleteRequest = await service.delete({ slug })
 

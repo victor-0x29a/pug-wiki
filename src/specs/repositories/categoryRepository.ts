@@ -7,7 +7,7 @@ interface createProps {
 
 interface deleteProps {
     where: {
-        id: any
+        id: number
     }
 }
 

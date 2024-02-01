@@ -26,11 +26,12 @@ test('should decode a token with success', () => {
 test('should reset an auth params with success', () => {
     const AUTHORIZATION = "foo-bar"
     const USERNAME = "fooBar"
-    let requestSimulated = {
+    const requestSimulated = {
         session: {
             authorization: AUTHORIZATION,
             username: USERNAME
         }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any
 
     authInstance.cleanAuthParams(requestSimulated)

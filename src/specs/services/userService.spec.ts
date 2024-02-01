@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { AppError } from '../../appError';
 import { UserService } from '../../entities/user'
@@ -39,6 +40,7 @@ test('should create an user and realize the login', async () => {
 
     const { username, password } = userPayload
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _createRequest = await serviceInstance.create(userPayload)
     const loginRequest = await serviceInstance.createAuth({
         username,
