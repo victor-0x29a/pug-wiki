@@ -1,9 +1,24 @@
-## Necessary packages;
+<h1 align="center">
+  <br>
+  <img src="assets/pug.png"/>
+  <br>
+  PugWiki
+  <br>
+</h1>
 
-- docker;
-- nodejs;
+- Application server-side-rendering using the pug as a render engine;
+- At the moment using the mysql as database throught Docker;
+- Using SASS to all styles;
+- Specs with Jest;
+- Husky executing all tests after commit and before the commit the linter;
 
-## How install all dependencies from project?
+
+# Running locally
+
+Install the packages:
+
+- [Docker](https://www.docker.com/);
+- [NodeJS](https://nodejs.org/en);
 
 Go to the folder and run:
 
@@ -17,15 +32,13 @@ And after, run:
 yarn install
 ```
 
-## How run the project?
-
-Go to the folder and run:
+Now, to start, run:
 
 ```
 docker compose up -d
 ```
 
-And run:
+And:
 
 ```
 yarn dev
