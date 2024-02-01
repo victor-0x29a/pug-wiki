@@ -46,10 +46,10 @@ export const AuthController = {
             next(error)
         }
     },
-    registerPage: (req: Request, res: Response) => {
+    showRegister: (req: Request, res: Response) => {
         res.render('signup')
     },
-    loginPage: (req: Request, res: Response) => {
+    showLogin: (req: Request, res: Response) => {
         res.render('signin')
     }
 }

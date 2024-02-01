@@ -21,7 +21,8 @@ class Protected {
     }
 
     private loadRoutes(): void {
-        this.router.get("/me", ProtectMiddleware(1), UserController.me)
+        this.router.get("/me", ProtectMiddleware(1), UserController.showMe)
+
         this.router.delete("/category/:slug", ProtectMiddleware(2), CategoryController.deleteOne)
         this.router.post("/category/", ProtectMiddleware(2), CategoryController.createOne)
     }

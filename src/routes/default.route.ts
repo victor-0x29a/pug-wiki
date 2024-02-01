@@ -20,9 +20,9 @@ class Default {
     }
 
     private loadRoutes(): void {
-        this.router.get("/", DefaultController.index)
+        this.router.get("/", DefaultController.home)
         this.router.get("/help", DefaultController.help)
-        this.router.get("/category", CategoryController.getAll)
+        this.router.get("/category", CategoryController.showAll)
     }
 }
 

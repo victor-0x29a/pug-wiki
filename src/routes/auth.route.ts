@@ -11,10 +11,10 @@ class Auth {
     }
 
     private loadRoutes(): void {
-        this.router.get("/signin", UnableMiddleware, this.controller.loginPage)
+        this.router.get("/signin", UnableMiddleware, this.controller.showLogin)
         this.router.post("/signin", UnableMiddleware, this.controller.login)
         this.router.post("/signup", UnableMiddleware, this.controller.register)
-        this.router.get("/signup", UnableMiddleware, this.controller.registerPage)
+        this.router.get("/signup", UnableMiddleware, this.controller.showRegister)
     }
 }
 

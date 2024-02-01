@@ -6,7 +6,7 @@ import { CategoryRepository } from '../entities/category/repository';
 const category = new CategoryService(new CategoryRepository())
 
 export const CategoryController = {
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async showAll(req: Request, res: Response, next: NextFunction) {
         return category.findAll()
             .then((data: ICategory[]) => {
                 return res.status(200).render('category', {
