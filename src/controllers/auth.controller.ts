@@ -1,4 +1,4 @@
-import { UserService } from "../entities"
+import { IUser, UserService } from "../entities"
 import { Request, Response, NextFunction } from 'express'
 import { UserRepository } from "../entities/user/repository"
 import { SessionData } from 'express-session';
@@ -15,7 +15,7 @@ const user = new UserService(new UserRepository())
 export const AuthController = {
     register: async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { password, repeatedPassword, username } = req?.body
+            const { password, repeatedPassword, username } = req?.body as IUser
 
             return user.create({
                 username,
