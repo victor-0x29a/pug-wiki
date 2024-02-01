@@ -52,20 +52,20 @@ class Service {
 
     async createAuth(data: authDataRequest): Promise<AuthDataResponse> {
         try {
-            const VALID_DATA_MESSAGE = 'Confira se o nome de usuário ou senha são validos.'
+            const INVALID_DATA_MESSAGE = 'Confira se o nome de usuário ou senha são validos.'
 
             const { username, password } = await IUserAuthSchema.validate(data)
 
             const userData = await this.find(username)
 
             if (!userData) {
-                throw new AppError(VALID_DATA_MESSAGE)
+                throw new AppError(INVALID_DATA_MESSAGE)
             }
 
             const isMatchPassword = await compareHash(userData!.password, password)
 
             if (!isMatchPassword) {
-                throw new AppError(VALID_DATA_MESSAGE)
+                throw new AppError(INVALID_DATA_MESSAGE)
             }
 
             const authRepository = new Auth()
