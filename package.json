@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --fix --ext .ts .",
     "test-config": "jest --init",
     "dev": "export NODE_ENV=dev && nodemon src/index.ts",
     "test": "jest"

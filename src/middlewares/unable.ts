@@ -6,18 +6,18 @@ const ENDPOINT_REDIRECT = '/backoffice/me'
 const authUtil = new Auth()
 
 export const UnableMiddleware = (req: Request, res: Response, next: NextFunction): void => {
-  const token = req.session.authorization as string | undefined | null
-  const hasToken = Boolean(token)
-  if (!hasToken) {
-    next(); return
-  }
+    const token = req.session.authorization as string | undefined | null
+    const hasToken = Boolean(token)
+    if (!hasToken) {
+        next(); return
+    }
 
-  const isValidToken = authUtil.verifyToken(token as string)
+    const isValidToken = authUtil.verifyToken(token as string)
 
-  if (!isValidToken) {
-    authUtil.cleanAuthParams(req)
-    next(); return
-  }
+    if (!isValidToken) {
+        authUtil.cleanAuthParams(req)
+        next(); return
+    }
 
-  new ExpressUtils(ENDPOINT_REDIRECT).Unauthorized(req, res)
+    new ExpressUtils(ENDPOINT_REDIRECT).Unauthorized(req, res)
 }

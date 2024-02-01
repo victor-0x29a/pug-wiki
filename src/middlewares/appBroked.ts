@@ -1,25 +1,27 @@
-import type express from 'express'
+import express from 'express'
 import { getViewByPath } from '../utils'
 import { isStaging } from '../constants'
+import { AppError } from '../appError'
 
-export const AppBrokedMiddleware = (error: any, req: express.Request, res: express.Response, next: express.NextFunction): any => {
-  if (isStaging) {
-    console.log(error)
-  }
+export const AppBrokedMiddleware = (error: unknown, req: express.Request, res: express.Response) => {
+    if (isStaging) {
+        console.log(error)
+    }
 
-  const isErrorCausedByApp = Boolean(error?.pugApplicationError)
+    const isErrorCausedByApp = Boolean(error === AppError)
 
-  if (isErrorCausedByApp && error.isRest as boolean) {
-    return res.status(error?.statusCode).json({
-      message: error?.restMessage
-    })
-  }
+    if (isErrorCausedByApp) {
+        const { pugApplicationError, isRest, statusCode, restMessage } = error as AppError
 
-  if (isErrorCausedByApp) {
-    req.flash('error', error?.pugApplicationError)
-    res.status(400).render(getViewByPath(req))
-  } else {
-    res.locals.content = 'Houve um erro interno, tente novamente mais tarde.'
-    res.status(500).render('error')
-  }
+        if (isRest) return res.status(statusCode).json({
+            message: restMessage
+        })
+
+        req.flash('error', pugApplicationError as string)
+        res.status(400).render(getViewByPath(req))
+
+    } else {
+        res.locals.content = 'Houve um erro interno, tente novamente mais tarde.'
+        res.status(500).render('error')
+    }
 }
