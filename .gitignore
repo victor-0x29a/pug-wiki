@@ -1,5 +1,5 @@
 /node_modules
-/src/public/styles/*
+/src/public/styles
 /coverage
 package-lock.json
 yarn.lock
