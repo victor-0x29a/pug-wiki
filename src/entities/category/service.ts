@@ -3,6 +3,7 @@ import { ICategory, ICategoryFind } from "../dto/category.dto";
 import { CategoryRepository } from "./repository";
 import { parseCategory } from "./parser";
 import { ICategoryFindSchema, ICategorySchema } from "./serializer"
+import { ValidationError } from "yup";
 
 class Service {
     private readonly repository;
@@ -32,9 +33,10 @@ class Service {
             }
 
             return await this.repository.create(schemaValidation)
-        } catch (error: any) {
-            if (error?.name === 'ValidationError') {
-                throw new AppError(error.errors[0], true, error.errors[0], 422)
+        } catch (error: unknown) {
+            if (error === ValidationError) {
+                const yupError = error as ValidationError
+                throw new AppError(yupError.errors[0], true, yupError.errors[0], 422)
             } else {
                 throw error
             }
@@ -53,9 +55,10 @@ class Service {
             const { id } = category
 
             return this.repository.delete(id!) as Promise<ICategoryFind>
-        } catch (error: any) {
-            if (error?.name === 'ValidationError') {
-                throw new AppError(error.errors[0], true, error.errors[0], 422)
+        } catch (error: unknown) {
+            if (error === ValidationError) {
+                const yupError = error as ValidationError
+                throw new AppError(yupError.errors[0], true, yupError.errors[0], 422)
             } else {
                 throw error
             }

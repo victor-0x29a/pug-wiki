@@ -1,9 +1,9 @@
-export type ICategory = {
+export interface ICategory {
     id?: number
     label: string
     slug: string
 }
 
-export type ICategoryFind = {
+export interface ICategoryFind {
     slug: string
 }
