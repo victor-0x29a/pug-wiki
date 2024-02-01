@@ -1,0 +1,13 @@
+@import "../vars";
+
+.group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    max-width: 600px;
+    min-width: 250px;
+    input, button {
+        width: 100%;
+    }
+}

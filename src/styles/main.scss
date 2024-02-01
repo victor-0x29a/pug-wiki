@@ -1,8 +1,22 @@
 @import 'vars';
 @import 'anim';
 @import 'queries';
-@import 'custom';
 @import 'addons';
+
+@import './elements/button';
+@import './elements/div';
+@import './elements/form';
+@import './elements/image';
+
+@import './components/category';
+@import './components/dropdown-container';
+@import './components/feed-container';
+@import './components/group';
+@import './components/nav-title';
+@import './components/page-header';
+@import './components/paragraph';
+@import './components/search-area';
+@import './components/warning';
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 

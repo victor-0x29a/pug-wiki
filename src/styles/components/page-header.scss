@@ -1,0 +1,14 @@
+@import "../vars";
+
+.page-header {
+    margin-top: 1rem;
+    margin-bottom: 2.45rem;
+    h3 {
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+
+    hr {
+        border-color: $second-color;
+    }
+}

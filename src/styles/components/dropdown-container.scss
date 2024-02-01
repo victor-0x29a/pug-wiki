@@ -1,0 +1,34 @@
+@import "../vars";
+
+.dropdown-container {
+    height: 100%;
+    width: fit-content;
+
+    &::before {
+        display: block;
+        border-bottom: 2px solid $second-color;
+        width: 4rem;
+        content: attr(title);
+        color: $text-color;
+        font-weight: bolder;
+        padding: $pd-default - 5px;
+        border-radius: unset;
+        font-size: $text-size;
+        transition: width 1s;
+    }
+
+    > .dropdown-item {
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    &:hover {
+     &::before {
+        width: 100%;
+      }
+     > .dropdown-item {
+        opacity: 1;
+        transition: opacity 1s;
+     }
+    }
+}

@@ -1,0 +1,24 @@
+.donator {
+    margin-top: 1rem;
+    padding: 20px;
+    border-radius: 4px;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    .wallet {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    p, button {
+        font-size: $text-size;
+    }
+
+    button {
+        padding: 5px;
+    }
+}

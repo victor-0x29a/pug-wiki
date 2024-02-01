@@ -1,0 +1,36 @@
+@import "../vars";
+
+.content-origin {
+    width: 95%;
+    max-width: 1400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.center {
+    align-items: center;
+    height: 80%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-right {
+    justify-content: right;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.width-auto {
+    width: auto;
+}

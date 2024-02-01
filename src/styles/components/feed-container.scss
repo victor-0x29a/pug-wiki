@@ -1,0 +1,8 @@
+@import "../vars";
+
+.feed-container {
+    border-right: 1px solid $second-color;
+    border-left: 1px solid $second-color;
+    min-height: 90vh;
+    padding: 0.5rem;
+}

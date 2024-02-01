@@ -1,0 +1,12 @@
+@import "../vars";
+
+.category-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+}
+
+.category-item {
+    font-size: $text-size;
+}

@@ -1,0 +1,17 @@
+@import "../vars";
+
+.search-area {
+
+    > button, input {
+        font-size: calc(#{$text-size} - 0.2rem);
+        padding: calc(#{$pd-default} - 4px);
+    }
+
+    > button {
+        width: 5rem;
+    }
+    > input {
+        width: 10rem;
+        margin-right: 0.3rem;
+    }
+}

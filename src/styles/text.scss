@@ -1,0 +1,7 @@
+.high-size {
+    font-size: calc(#{$text-size} + 0.2rem);
+}
+
+.medium-size {
+    font-size: calc(#{$text-size} - 0.2rem);
+}

@@ -1,0 +1,23 @@
+@import "../vars";
+
+.default-form {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section > p {
+        width: $width-default;
+    }
+}
+
+.details-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    a {
+        display: block;
+        width: max-content;
+    }
+}
