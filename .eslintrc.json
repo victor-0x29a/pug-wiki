@@ -9,6 +9,6 @@
         "sourceType": "module"
     },
     "rules": {
-        "indent": false
+        "indent": "warn"
     }
 }
