@@ -8,6 +8,7 @@ const UNAUTHORIZED_ENDPOINT_REDIRECT = '/backoffice/me'
 const authInstance = new Auth()
 
 export const ProtectMiddleware = (permissionLevelRequired: 1 | 2) => (req: Request, res: Response, next: NextFunction) => {
+    // TODO: REMOVE THIS BYPASS AND FIX THE STORE OF SESSION
     if (isStaging) next()
 
     const token = req.session.authorization
