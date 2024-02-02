@@ -16,6 +16,11 @@ button {
     &:hover {
         background: $btn-bg-on-hover;
     }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
 
 .btn-danger {
