@@ -3,7 +3,8 @@ import { getViewByPath } from '../utils'
 import { isStaging } from '../constants'
 import { AppError } from '../appError'
 
-export const AppBrokedMiddleware = (error: unknown, req: express.Request, res: express.Response) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const AppBrokedMiddleware = (error: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (isStaging) {
         console.log(error)
     }
@@ -19,7 +20,6 @@ export const AppBrokedMiddleware = (error: unknown, req: express.Request, res: e
 
         req.flash('error', pugApplicationError as string)
         res.status(400).render(getViewByPath(req))
-
     } else {
         res.locals.content = 'Houve um erro interno, tente novamente mais tarde.'
         res.status(500).render('error')
