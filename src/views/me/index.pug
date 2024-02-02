@@ -6,7 +6,15 @@ block layout-content
     +warning()
     div.container.margin-top-20
         section.row.center.flex-between
-            h3.medium-size.margin-right.text-center #{usernameProfile}
+            div.group.group-modified
+                p.high-size Nome de usuário
+                input(type="text", name="username" value="" + usernameProfile)
             div.box
-                button(type="button").medium-size.width-auto.margin-right #{"Trocar senha"}
-                button(type="button").medium-size.width-auto.btn-danger #{"Excluir conta"}
+                button(type="button" disabled).width-auto.margin-right Trocar senha
+                button(type="button" disabled).width-auto.btn-danger Excluir conta
+
+        hr.margin-top.margin-bottom
+
+        section.row.center.flex-between
+            div.group
+                p.high-size Últimas atividades
