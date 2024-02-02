@@ -1,0 +1,11 @@
+@import "../vars";
+
+.svg-clickable {
+    > svg {
+        cursor: pointer;
+    }
+}
+
+svg {
+    fill: $second-color;
+}
